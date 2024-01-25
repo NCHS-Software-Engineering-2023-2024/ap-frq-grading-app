@@ -14,29 +14,53 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: lightcoral;
+  min-height: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(12px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
   color: #61dafb;
 }
 
+.InfoTab {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: lightgray;
+  padding: 10px;
+  font-size: 24px;
+  color: black;
+  border-radius: 5px;
+}
+
+.LogoutButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: lightgray;
+  padding: 10px;
+  font-size: 24px;
+  color: black;
+  border-radius: 5px;
+}
+
+
+
 .DashboardButton {
-  background-color: whitesmoke;
+  background-color: lightcoral;
   border: none;
   color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   font-size: 24px;
-  margin: 4px 2px;
+  margin: 50px 2px;
   cursor: pointer;
 }
 

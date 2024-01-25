@@ -7,13 +7,31 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          AP FRQ Grading App wsg
+          Dashboard
         </p>
-        
+
+        <button className="InfoTab">
+          Info
+        </button>
+
+        <button className="LogoutButton">
+          Logout
+        </button>
+      </header>
+
+      <body>
         <button className="DashboardButton">
           Rubrics
         </button>
-      </header>
+
+        <button className="DashboardButton">
+          Students
+        </button>
+
+        <button className="DashboardButton">
+          Assignments
+        </button>
+      </body>
     </div>
   );
 }
