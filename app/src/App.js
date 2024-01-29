@@ -1,37 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import Logout from './pages/Logout';
+import Info from './pages/Info';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Dashboard
-        </p>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" index element={<Dashboard />} />
+          <Route path="/home" element={<Dashboard />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/info" element={<Info />} />
+        </Routes>
+      </BrowserRouter>
 
-        <button className="InfoTab">
-          Info
-        </button>
-
-        <button className="LogoutButton">
-          Logout
-        </button>
-      </header>
-
-      <body>
-        <button className="DashboardButton">
-          Rubrics
-        </button>
-
-        <button className="DashboardButton">
-          Students
-        </button>
-
-        <button className="DashboardButton">
-          Assignments
-        </button>
-      </body>
+      
     </div>
   );
 }
