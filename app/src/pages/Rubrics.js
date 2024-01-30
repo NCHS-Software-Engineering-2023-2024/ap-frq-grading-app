@@ -1,11 +1,11 @@
-import Header from '../components/Header';
 import PageHeader from '../components/PageHeader';
+import {useNavigate} from 'react-router-dom';
 
-export default function Info() {
+export default function Rubrics() {
+    const navigate = useNavigate();
     return (
         <div>
             <PageHeader />
-            <h2>Info</h2>
         </div>
     )
 }
