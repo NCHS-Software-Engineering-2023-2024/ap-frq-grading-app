@@ -77,6 +77,15 @@
   cursor: pointer;
 }
 
+.RubricOutline, th, td {
+  border-collapse: collapse;
+  margin: 50px 450px;
+  padding: 15px 32px;
+  border: 3px solid;
+}
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
