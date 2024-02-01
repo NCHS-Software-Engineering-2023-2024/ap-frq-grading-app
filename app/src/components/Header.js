@@ -13,7 +13,7 @@ export default function Header() {
                     Info
                 </button>
 
-                <button onClick={()=>navigate("/logout")} className="LogoutButton">
+                <button onClick={()=>navigate("/")} className="LogoutButton">
                     Log Out
                 </button>
             </header>

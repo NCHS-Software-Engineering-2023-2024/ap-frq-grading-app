@@ -3,7 +3,7 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
-import Logout from './pages/Logout';
+import Login from './pages/Login';
 import Info from './pages/Info';
 import Rubrics from './pages/Rubrics';
 import Students from './pages/Students';
@@ -14,8 +14,8 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
+          <Route path ="/" element={<Login />} />
           <Route path="/home" element={<Dashboard />} />
-          <Route path="/logout" element={<Logout />} />
           <Route path="/info" element={<Info />} />
           <Route path="/rubrics" element={<Rubrics />} />
           <Route path ="/students" element={<Students />} />

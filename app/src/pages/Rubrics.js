@@ -6,6 +6,14 @@ export default function Rubrics() {
     return (
         <div>
             <PageHeader />
+
+            <body style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <h1> RUBRICS </h1>
+            </body>
         </div>
     )
 }

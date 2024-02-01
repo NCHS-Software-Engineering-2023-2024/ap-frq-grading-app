@@ -6,6 +6,14 @@ export default function Assignments() {
     return (
         <div>
             <PageHeader />
+
+            <body style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <h1> ASSIGNMENTS </h1>
+            </body>
         </div>
     )
 }

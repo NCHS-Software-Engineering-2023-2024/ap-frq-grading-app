@@ -6,6 +6,14 @@ export default function Students() {
     return (
         <div>
             <PageHeader />
+
+            <body style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <h1> STUDENTS </h1>
+            </body>
         </div>
     )
 }

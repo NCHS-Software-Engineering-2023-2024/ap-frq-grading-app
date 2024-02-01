@@ -5,7 +5,14 @@ export default function Info() {
     return (
         <div>
             <PageHeader />
-            <h2>Info</h2>
+            
+            <body style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}>
+                <h1> ABOUT </h1>
+            </body>
         </div>
     )
 }
