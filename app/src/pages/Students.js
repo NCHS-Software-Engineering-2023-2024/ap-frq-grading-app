@@ -5,7 +5,7 @@ export default function Students() {
     const navigate = useNavigate();
     return (
         <div>
-            <PageHeader />
+            <PageHeader headerName="Students"/>
 
             <body style={{
                 display: "flex",

@@ -5,7 +5,8 @@ export default function Assignments() {
     const navigate = useNavigate();
     return (
         <div>
-            <PageHeader />
+            
+            <PageHeader headerName="Assignments" />
 
             <body style={{
                 display: "flex",

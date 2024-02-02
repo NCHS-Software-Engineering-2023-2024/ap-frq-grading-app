@@ -5,7 +5,7 @@ export default function Rubrics() {
     const navigate = useNavigate();
     return (
         <div>
-            <PageHeader />
+            <PageHeader headerName="Rubrics" />
 
             <body style={{
                 display: "flex",
