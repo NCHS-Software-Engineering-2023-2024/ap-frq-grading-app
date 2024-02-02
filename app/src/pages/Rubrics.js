@@ -1,16 +1,34 @@
 import RubricHeader from '../components/RubricHeader';
 import {useNavigate} from 'react-router-dom';
+import {useState} from 'react';
+import ReactDOM from 'react-dom/client';
+
+
+  
+
+const [title, setTitle] = useState("Example Rubric");
 
 export default function Rubrics() {
     const navigate = useNavigate();
     return (
+
+        
         <div>
             <RubricHeader />
+
+            <>
+            <h1>{title}</h1>
+            <button
+                type="button"
+                onClick={() => setTitle("AP Rubric")}
+            >AP Rubric</button>
+            </>
+
             <table className="RubricOutline">
             
                 <input type="text" id="Standard" name="RubricStandard" placeholder="Enter Standard Here"></input>
                 
-
+                
                 <tr>
                     <th> 1 </th>
                     <th> 2 </th>
