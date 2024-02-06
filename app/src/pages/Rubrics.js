@@ -6,10 +6,11 @@ import ReactDOM from 'react-dom/client';
 
   
 
-const [title, setTitle] = useState("Example Rubric");
 
 export default function Rubrics() {
     const navigate = useNavigate();
+    const [title, setTitle] = useState("Example Rubric");
+
     return (
 
         
