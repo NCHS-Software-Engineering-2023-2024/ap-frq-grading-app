@@ -10,6 +10,7 @@ import ReactDOM from 'react-dom/client';
 export default function Rubrics() {
     const navigate = useNavigate();
     const [title, setTitle] = useState("Example Rubric");
+    var temp = "test";
 
     return (
 
@@ -18,12 +19,17 @@ export default function Rubrics() {
             <RubricHeader />
 
             <>
-            <h1>{title}</h1>
+            <h1 className = "RubricTitle">{title}</h1>
+
+            <input type="text" id="Title" name="RubricTitle" placeholder="Enter Title Here"  className = "EnterName"></input>
+
             <button
                 type="button"
-                onClick={() => setTitle("AP Rubric")}
-            >AP Rubric</button>
+                onClick={() => setTitle(document.getElementById('Title').value)}
+                className="ConfirmName"
+            >Confirm</button>
             </>
+            
 
             <table className="RubricOutline">
             

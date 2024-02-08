@@ -63,7 +63,20 @@
 }
 
 
+.ConfirmName {
+  padding: 10px 25px;
+  margin: 10px 900px;
+}
 
+.EnterName {
+  padding: 50px auto;
+  margin: 10px 875px;
+}
+
+.RubricTitle {
+  padding: 100px 500px;
+  margin: 10px 450px;
+}
 
 .DashboardButton {
   background-color: lightcoral;
