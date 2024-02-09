@@ -5,7 +5,7 @@ export default function Rubrics() {
     const navigate = useNavigate();
     return (
         <div>
-            <PageHeader headerName="Rubrics" />
+            <PageHeader headerName="Rubrics" toNavigate="/home" />
 
             <body style={{
                 display: "flex",
@@ -13,6 +13,7 @@ export default function Rubrics() {
                 alignItems: "center"
             }}>
                 <h1> RUBRICS </h1>
+                <button onClick={() => navigate('/rubrics/new')}>New Rubric</button>
             </body>
         </div>
     )

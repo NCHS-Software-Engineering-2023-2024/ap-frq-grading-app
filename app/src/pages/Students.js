@@ -5,7 +5,7 @@ export default function Students() {
     const navigate = useNavigate();
     return (
         <div>
-            <PageHeader headerName="Students"/>
+            <PageHeader headerName="Students" toNavigate="/home" />
 
             <body style={{
                 display: "flex",
