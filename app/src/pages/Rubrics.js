@@ -21,20 +21,32 @@ export default function Rubrics() {
             <>
             <h1 className = "RubricTitle">{title}</h1>
 
-            <input type="text" id="Title" name="RubricTitle" placeholder="Enter Title Here"  className = "EnterName"></input>
+            <body style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                
+            <input type="text" id="Title" name="RubricTitle" placeholder="Enter Title Here"  className = "RubricTitleInput"></input>
 
             <button
                 type="button"
                 onClick={() => setTitle(document.getElementById('Title').value)}
-                className="ConfirmName"
+                className="ConfirmTitleButton"
             >Confirm</button>
+
+            </body>
             </>
+            
             
 
             <table className="RubricOutline">
-            
-                <input type="text" id="Standard" name="RubricStandard" placeholder="Enter Standard Here"></input>
-                
+                            
+                <tr>
+                    <th colspan = "4">
+                        <input type="text" id="Standard" name="RubricStandard" placeholder="Enter Standard Here" className = "RubricInputField"></input>
+                    </th>
+                </tr>
                 
                 <tr>
                     <th> 1 </th>
@@ -44,10 +56,10 @@ export default function Rubrics() {
                 </tr>
 
                 <tr>
-                    <td> <input type="text" id="Description1" name="Description1" placeholder="Enter Description Here"></input> </td>
-                    <td> <input type="text" id="Description1" name="Description1" placeholder="Enter Description Here"></input> </td>
-                    <td> <input type="text" id="Description1" name="Description1" placeholder="Enter Description Here"></input> </td>
-                    <td> <input type="text" id="Description1" name="Description1" placeholder="Enter Description Here"></input> </td>
+                    <td> <input type="text" id="Description1" name="Description1" placeholder="Enter Description Here" className = "RubricInputField"></input> </td>
+                    <td> <input type="text" id="Description1" name="Description1" placeholder="Enter Description Here" className = "RubricInputField"></input> </td>
+                    <td> <input type="text" id="Description1" name="Description1" placeholder="Enter Description Here" className = "RubricInputField"></input> </td>
+                    <td> <input type="text" id="Description1" name="Description1" placeholder="Enter Description Here" className = "RubricInputField"></input> </td>
                 </tr>
 
                 
