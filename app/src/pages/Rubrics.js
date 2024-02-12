@@ -12,8 +12,8 @@ export default function Rubrics() {
                 justifyContent: "center",
                 alignItems: "center"
             }}>
-                <h1> RUBRICS </h1>
-                <button onClick={() => navigate('/rubrics/new')}>New Rubric</button>
+                <button className="DashboardButton" onClick={() => navigate('/rubrics/new')}>New Rubric</button>
+                <button className="DashboardButton" onClick={() => navigate('/rubrics/view')}>Saved Rubrics</button>
             </body>
         </div>
     )
