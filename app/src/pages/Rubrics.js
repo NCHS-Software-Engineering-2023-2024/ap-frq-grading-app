@@ -5,14 +5,15 @@ export default function Rubrics() {
     const navigate = useNavigate();
     return (
         <div>
-            <PageHeader headerName="Rubrics" />
+            <PageHeader headerName="Rubrics" toNavigate="/home" />
 
             <body style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center"
             }}>
-                <h1> RUBRICS </h1>
+                <button className="DashboardButton" onClick={() => navigate('/rubrics/new')}>New Rubric</button>
+                <button className="DashboardButton" onClick={() => navigate('/rubrics/view')}>Saved Rubrics</button>
             </body>
         </div>
     )

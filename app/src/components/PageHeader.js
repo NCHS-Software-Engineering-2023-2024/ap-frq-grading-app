@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-export default function PageHeader({ headerName }) {
+export default function PageHeader({ headerName, toNavigate }) {
     const navigate = useNavigate();
     return (
         <div className="App">
@@ -9,7 +9,7 @@ export default function PageHeader({ headerName }) {
                     {headerName}
                 </p>
 
-                <button onClick={() => navigate("/home")} className="LogoutButton">
+                <button onClick={() => navigate(toNavigate)} className="LogoutButton">
                     Back
                 </button>
             </header>

@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader';
 export default function Info() {
     return (
         <div>
-            <PageHeader headerName="Info"/>
+            <PageHeader headerName="Info" toNavigate="/home"/>
             
             <body style={{
                 display: "flex",

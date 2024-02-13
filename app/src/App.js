@@ -8,6 +8,8 @@ import Info from './pages/Info';
 import Rubrics from './pages/Rubrics';
 import Students from './pages/Students';
 import Assignments from './pages/Assignments';
+import NewRubric from './pages/rubricpages/NewRubric';
+import ViewSavedRubrics from './pages/rubricpages/ViewSavedRubrics';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="/home" element={<Dashboard />} />
           <Route path="/info" element={<Info />} />
           <Route path="/rubrics" element={<Rubrics />} />
+          <Route path="/rubrics/new" element={<NewRubric />} />
+          <Route path="/rubrics/view" element={<ViewSavedRubrics />} />
           <Route path ="/students" element={<Students />} />
           <Route path ="/assignments" element={<Assignments/>} />
         </Routes>
