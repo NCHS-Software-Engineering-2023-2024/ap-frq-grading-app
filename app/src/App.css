@@ -117,7 +117,7 @@
   cursor: pointer;
 }
 
-.RubricOutline, th, td, tr {
+table, th, td, tr {
   text-align: center;
   border-collapse: collapse;
   margin: 50px 450px;
