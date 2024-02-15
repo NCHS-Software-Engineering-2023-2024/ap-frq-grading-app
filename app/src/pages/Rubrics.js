@@ -3,7 +3,75 @@ import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 
+let testRubrics = [
+    {
+        standard: "Evidence",
+        desc1: "one",
+        desc2: "two",
+        desc3: "three",
+        desc4: "four"
+    },
+    {
+        standard: "Thesis",
+        desc1: "one",
+        desc2: "two",
+        desc3: "three",
+        desc4: "four"
+    },
+    {
+        standard: "Complication",
+        desc1: "one",
+        desc2: "two",
+        desc3: "three",
+        desc4: "four"
+    }
+]
 
+function Table() {
+    const [savedRubrics, setRubrics] = useState(testRubrics);
+
+    return (
+        <div>
+            <table>
+                <thead>
+                    
+                    <tr> 
+                        <th colSpan = "5"> Example </th>
+                    </tr>
+                    
+                </thead>
+
+
+                    {
+                        savedRubrics.map((rubric) => (
+                        <tbody>
+                            <tr>
+                                <th colSpan = "4"> {rubric.standard} </th>
+                                <th> Action </th>    
+                            </tr>
+                            <tr>
+                                <td> 1 </td>
+                                <td> 2 </td>
+                                <td> 3 </td>
+                                <td> 4 </td>
+                            </tr>   
+                            <tr>
+                                <td> {rubric.desc1} </td>
+                                <td> {rubric.desc2} </td>
+                                <td> {rubric.desc3} </td>
+                                <td> {rubric.desc4} </td>
+                                <td>
+                                    <button> edit </button>
+                                    <button> delete </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        ))
+                    }
+            </table>
+        </div>
+    )
+}
 
 /*  
 function AddStandard(Rubric) {
@@ -81,6 +149,7 @@ export default function Rubrics() {
                     
                 </table>
             
+            {Table()}
                 
         </div>
 
