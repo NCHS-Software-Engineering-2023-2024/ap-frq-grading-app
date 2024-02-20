@@ -29,9 +29,34 @@ let testRubrics = [
 
 function Table() {
     const [savedRubrics, setRubrics] = useState(testRubrics);
+    const [desc1, setDesc1] = useState('');
+    const [desc2, setDesc2] = useState('');
+    const [desc3, setDesc3] = useState('');
+    const [desc4, setDesc4] = useState('');
+    const [standard, setStandard] = useState('');
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        testRubrics.push({standard: standard, desc1: desc1, desc2: desc2, desc3: desc3, desc4: desc4}); //Will need to tweak for database
+    }
+
+    const handleEdit = (standard) => {
+        setEditStandard(standard)
+    }
     return (
         <div>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <h2>
+                    <input type = "text" placeholder="Enter Standard" onChange={e => setStandard(e.target.value)}></input>
+                    <input type = "text" placeholder="Enter Desc1" onChange={e => setDesc1(e.target.value)}></input>
+                    <input type = "text" placeholder="Enter Desc2" onChange={e => setDesc2(e.target.value)}></input>
+                    <input type = "text" placeholder="Enter Desc3" onChange={e => setDesc3(e.target.value)}></input>
+                    <input type = "text" placeholder="Enter Desc4" onChange={e => setDesc4(e.target.value)}></input>
+                    <button type = "submit" value = "submit" className='addStandardButton'> Add </button>
+                    </h2>
+                </form>
+            </div>
             <table>
                 <thead>
                     
@@ -61,7 +86,7 @@ function Table() {
                                 <td> {rubric.desc3} </td>
                                 <td> {rubric.desc4} </td>
                                 <td>
-                                    <button> edit </button>
+                                    <button onClick={() => handleEdit(rubric.standard)}> edit </button>
                                     <button> delete </button>
                                 </td>
                             </tr>
@@ -122,7 +147,20 @@ export default function Rubrics() {
             
             
             
-                <table className="RubricOutline" id="Rubric">
+                
+            
+            {Table()}
+                
+        </div>
+
+
+    )
+}
+
+
+/*
+
+<table className="RubricOutline" id="Rubric">
                     <thead>       
                         <tr>
                             <th colSpan = "4">
@@ -148,11 +186,5 @@ export default function Rubrics() {
                     </tbody>
                     
                 </table>
-            
-            {Table()}
-                
-        </div>
 
-
-    )
-}
+*/
