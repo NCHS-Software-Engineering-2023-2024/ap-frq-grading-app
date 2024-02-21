@@ -147,6 +147,13 @@ form{
   cursor: pointer;
 }
 
+.StandardRow {
+  background-color: lightcoral;
+}
+
+.NumsRow {
+  background-color: rgb(240, 176, 176);
+}
 
 
 @keyframes App-logo-spin {

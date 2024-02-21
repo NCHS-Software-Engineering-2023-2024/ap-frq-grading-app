@@ -40,11 +40,59 @@ function Table() {
         testRubrics.push({standard: standard, desc1: desc1, desc2: desc2, desc3: desc3, desc4: desc4}); //Will need to tweak for database
     }
 
-    const handleEdit = (standard) => {
-        setEditStandard(standard)
+    const newRow = (event) => {
+        event.preventDefault();
+        testRubrics.push({standard: "Enter Standard Here", desc1: "Enter Desc1", desc2: "Enter Desc2", desc3: "Enter Desc3", desc4: "Enter Desc4"}); //Will need to tweak for database
+        setRubrics(testRubrics);
     }
+
+    
+
+    /*const handleEdit = (standard) => {
+        setEditStandard(standard)
+    }*/
     return (
         <div>
+            
+            <table>
+
+
+                    {
+                        savedRubrics.map((rubric) => (
+                        <tbody>
+                            <tr className='StandardRow'>
+                                <th colSpan = "4"> {rubric.standard} </th>
+                                <th> Action </th>    
+                            </tr>
+                            <tr className='NumsRow'>
+                                <td> 1 </td>
+                                <td> 2 </td>
+                                <td> 3 </td>
+                                <td> 4 </td>
+                                <td>   </td>
+                            </tr>   
+                            <tr>
+                                <td> {rubric.desc1} </td>
+                                <td> {rubric.desc2} </td>
+                                <td> {rubric.desc3} </td>
+                                <td> {rubric.desc4} </td>
+                                <td>
+                                    <button > edit </button>
+                                    <button> delete </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        ))
+                    }
+            </table>
+            <div>
+            <form onSubmit={newRow}>
+                    <h2>
+                    <button type = "submit" value = "submit" className='addStandardButton'> Add Row </button>
+                    </h2>
+                </form>
+            </div>
+
             <div>
                 <form onSubmit={handleSubmit}>
                     <h2>
@@ -57,43 +105,6 @@ function Table() {
                     </h2>
                 </form>
             </div>
-            <table>
-                <thead>
-                    
-                    <tr> 
-                        <th colSpan = "5"> Example </th>
-                    </tr>
-                    
-                </thead>
-
-
-                    {
-                        savedRubrics.map((rubric) => (
-                        <tbody>
-                            <tr>
-                                <th colSpan = "4"> {rubric.standard} </th>
-                                <th> Action </th>    
-                            </tr>
-                            <tr>
-                                <td> 1 </td>
-                                <td> 2 </td>
-                                <td> 3 </td>
-                                <td> 4 </td>
-                            </tr>   
-                            <tr>
-                                <td> {rubric.desc1} </td>
-                                <td> {rubric.desc2} </td>
-                                <td> {rubric.desc3} </td>
-                                <td> {rubric.desc4} </td>
-                                <td>
-                                    <button onClick={() => handleEdit(rubric.standard)}> edit </button>
-                                    <button> delete </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        ))
-                    }
-            </table>
         </div>
     )
 }
