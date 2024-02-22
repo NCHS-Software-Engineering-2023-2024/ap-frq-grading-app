@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 
-let testRubrics = [
+var testRubrics = [
     {
         standard: "Evidence",
         desc1: "one",
@@ -27,6 +27,15 @@ let testRubrics = [
     }
 ]
 
+//USE THIS TO FIND INDEX OF THE STANDARD
+function getSubIndex(array, stand){
+    for(let i = 0; i < array.lengthl; i++){
+        if((array.at(i).standard == stand)){
+            return i;
+        }
+    }
+}
+
 function Table() {
     const [savedRubrics, setRubrics] = useState(testRubrics);
     const [desc1, setDesc1] = useState('');
@@ -34,6 +43,13 @@ function Table() {
     const [desc3, setDesc3] = useState('');
     const [desc4, setDesc4] = useState('');
     const [standard, setStandard] = useState('');
+    const [editStandard, setEditStandard] = useState('void')
+
+    const [udesc1, usetDesc1] = useState('');
+    const [udesc2, usetDesc2] = useState('');
+    const [udesc3, usetDesc3] = useState('');
+    const [udesc4, usetDesc4] = useState('');
+    const [ustandard, usetStandard] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -46,19 +62,54 @@ function Table() {
         setRubrics(testRubrics);
     }
 
-    
+    const handleEdit = (standard) => {
+        let index = savedRubrics.indexOf("Thesis");
+        usetStandard((savedRubrics.at(index)).standard);
+        usetDesc1((savedRubrics.at(index)).desc1);
+        usetDesc2((savedRubrics.at(index)).desc2);
+        usetDesc3((savedRubrics.at(index)).desc3);
+        usetDesc4((savedRubrics.at(index)).desc4 + (savedRubrics.at(index)).standard);
+        setEditStandard(standard);
+    }
 
-    /*const handleEdit = (standard) => {
-        setEditStandard(standard)
-    }*/
+    //Will need to tweak after adding database 
+    const handleUpdate = () => {
+        let index = savedRubrics.indexOf(editStandard);
+        let tempRubrics = [];
+        tempRubrics = (savedRubrics.slice(0, index)).concat(({standard: editStandard, desc1: desc1, desc2: desc2, desc3: desc3, desc4: desc4}),(savedRubrics.slice(index + 1, savedRubrics.length)));
+        setEditStandard('void')
+        setRubrics(tempRubrics);
+    }
     return (
         <div>
             
             <table>
-
-
                     {
                         savedRubrics.map((rubric) => (
+                            rubric.standard === editStandard ?
+                            <tbody>
+                                <tr className='StandardRow'>
+                                   <th colSpan = "4"> <input type='text' value={ustandard} onChange={e => usetStandard(e.target.value)}></input> </th>
+                                    <th> Action </th>    
+                                </tr>
+                                <tr className='NumsRow'>
+                                    <td> 1 </td>
+                                    <td> 2 </td>
+                                    <td> 3 </td>
+                                    <td> 4 </td>
+                                    <td>   </td>
+                                </tr>   
+                                <tr>
+                                    <td> <input type='text' value={udesc1} onChange={e => usetDesc1(e.target.value)}></input> </td>
+                                    <td> <input type='text' value={udesc2} onChange={e => usetDesc2(e.target.value)}></input> </td>
+                                    <td> <input type='text' value={udesc3} onChange={e => usetDesc3(e.target.value)}></input> </td>
+                                    <td> <input type='text' value={udesc4} onChange={e => usetDesc4(e.target.value)}></input> </td>
+                                    <td>
+                                        <button onClick={() => handleUpdate()}> update </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            :
                         <tbody>
                             <tr className='StandardRow'>
                                 <th colSpan = "4"> {rubric.standard} </th>
@@ -77,7 +128,7 @@ function Table() {
                                 <td> {rubric.desc3} </td>
                                 <td> {rubric.desc4} </td>
                                 <td>
-                                    <button > edit </button>
+                                    <button onClick={() => handleEdit(rubric.standard)}> edit </button>
                                     <button> delete </button>
                                 </td>
                             </tr>
