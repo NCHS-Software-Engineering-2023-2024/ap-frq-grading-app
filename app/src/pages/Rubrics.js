@@ -1,7 +1,9 @@
 import RubricHeader from '../components/RubricHeader';
-import {useNavigate} from 'react-router-dom';
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
+
+
 
 var testRubrics = [
     {
@@ -29,14 +31,18 @@ var testRubrics = [
 
 //USE THIS TO FIND INDEX OF THE STANDARD
 function getSubIndex(array, stand){
-    for(let i = 0; i < array.lengthl; i++){
-        if((array.at(i).standard == stand)){
+    for(let i = 0; i < array.length; i++){
+        if(((array.at(i)).standard === stand)){
             return i;
         }
     }
+    return -1;
 }
 
+var newStandard = 0;
+
 function Table() {
+    const location = useLocation();
     const [savedRubrics, setRubrics] = useState(testRubrics);
     const [desc1, setDesc1] = useState('');
     const [desc2, setDesc2] = useState('');
@@ -51,38 +57,51 @@ function Table() {
     const [udesc4, usetDesc4] = useState('');
     const [ustandard, usetStandard] = useState('');
 
+    //Creates new preset row -- Will remove after everythings working more st
     const handleSubmit = (event) => {
         event.preventDefault();
+        testRubrics = savedRubrics;
         testRubrics.push({standard: standard, desc1: desc1, desc2: desc2, desc3: desc3, desc4: desc4}); //Will need to tweak for database
+        newStandard+=1;
+        setRubrics(testRubrics);
+        location.reload();
     }
 
+    //Creates new empty row
     const newRow = (event) => {
         event.preventDefault();
-        testRubrics.push({standard: "Enter Standard Here", desc1: "Enter Desc1", desc2: "Enter Desc2", desc3: "Enter Desc3", desc4: "Enter Desc4"}); //Will need to tweak for database
+        testRubrics = savedRubrics;
+        testRubrics.push({standard: "New Standard ("+newStandard+")", desc1: "Enter Desc1", desc2: "Enter Desc2", desc3: "Enter Desc3", desc4: "Enter Desc4"}); //Will need to tweak for database
+        newStandard+=1;
         setRubrics(testRubrics);
+        location.reload();
     }
 
+    //Enter edit mode
     const handleEdit = (standard) => {
-        let index = savedRubrics.indexOf("Thesis");
+        setEditStandard(standard);
+        let index = getSubIndex(savedRubrics, standard);
         usetStandard((savedRubrics.at(index)).standard);
         usetDesc1((savedRubrics.at(index)).desc1);
         usetDesc2((savedRubrics.at(index)).desc2);
         usetDesc3((savedRubrics.at(index)).desc3);
-        usetDesc4((savedRubrics.at(index)).desc4 + (savedRubrics.at(index)).standard);
-        setEditStandard(standard);
+        usetDesc4((savedRubrics.at(index)).desc4);
     }
 
     //Will need to tweak after adding database 
-    const handleUpdate = () => {
-        let index = savedRubrics.indexOf(editStandard);
+    //Update Editted contents
+    const handleUpdate = (standard) => {
+        let index = getSubIndex(savedRubrics, standard);
         let tempRubrics = [];
-        tempRubrics = (savedRubrics.slice(0, index)).concat(({standard: editStandard, desc1: desc1, desc2: desc2, desc3: desc3, desc4: desc4}),(savedRubrics.slice(index + 1, savedRubrics.length)));
+        tempRubrics = (savedRubrics.slice(0, index)).concat(({standard: standard, desc1: udesc1, desc2: udesc2, desc3: udesc3, desc4: udesc4}),(savedRubrics.slice(index + 1, savedRubrics.length)));
         setEditStandard('void')
         setRubrics(tempRubrics);
     }
+
     return (
-        <div>
-            
+        <div><p>
+            Test: {getSubIndex(savedRubrics, "Complication")}
+            </p>
             <table>
                     {
                         savedRubrics.map((rubric) => (
@@ -105,7 +124,7 @@ function Table() {
                                     <td> <input type='text' value={udesc3} onChange={e => usetDesc3(e.target.value)}></input> </td>
                                     <td> <input type='text' value={udesc4} onChange={e => usetDesc4(e.target.value)}></input> </td>
                                     <td>
-                                        <button onClick={() => handleUpdate()}> update </button>
+                                        <button onClick={() => handleUpdate(editStandard)}> update </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -177,6 +196,7 @@ function AddStandard(Rubric) {
 */
 
 export default function Rubrics() {
+    
     const navigate = useNavigate();
     const [title, setTitle] = useState("Example Rubric");
 
