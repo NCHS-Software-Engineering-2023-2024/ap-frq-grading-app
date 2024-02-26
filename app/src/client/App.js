@@ -12,6 +12,10 @@ import NewRubric from './pages/rubricpages/NewRubric';
 import ViewSavedRubrics from './pages/rubricpages/ViewSavedRubrics';
 
 function App() {
+
+  // to access the server
+  const baseURL = "http://localhost:8000/"
+
   return (
     <div>
       <BrowserRouter>
