@@ -75,13 +75,67 @@
   cursor: pointer;
 }
 
-.RubricInputField {
+.updateStandardButton {
+  background-color: lightcoral;
+  border: none;
+  color: black;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  margin: 0px 0px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.editStandardButton {
+  background-color: lightcoral;
+  border: black;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0px 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.deleteStandardButton {
+  background-color: rgb(190, 0, 0);
+  border: black;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0px 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.descInputField {
   border: none;
   outline: none;
-  padding: 50px auto;
+  padding: none;
+  margin: 0px 0px;
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
-  font-size: large;
+  font-size: 20px;
+}
+
+.standardInputField {
+  border: none;
+  outline: none;
+  background: none;
+  padding: none;
+  margin: none;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .RubricStandard { 
@@ -125,7 +179,15 @@ table, th, td, tr {
   padding: 15px 32px;
   border: 3px solid;
   font-family: 'Times New Roman', Times, serif;
-  font-size: larger;
+  font-size: 24px;
+}
+
+.rubrow1, .rubrow2, .rubrow3, .rubrow4 {
+  width: 21%;
+}
+
+.rubrow5 {
+  width: 16%;
 }
 
 form{
@@ -139,11 +201,11 @@ form{
   background-color: lightcoral;
   border: none;
   color: black;
-  padding: 15px 32px;
+  padding: 15px 320px;
   text-align: center;
   text-decoration: none;
   font-size: 24px;
-  margin: 50px 2px;
+  margin: 40px 700px;
   cursor: pointer;
 }
 

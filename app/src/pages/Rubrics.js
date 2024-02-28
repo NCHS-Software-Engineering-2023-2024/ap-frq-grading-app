@@ -1,12 +1,33 @@
 import RubricHeader from '../components/RubricHeader';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {useEffect, useState} from 'react';
+import Select from 'react-select';
 import ReactDOM from 'react-dom/client';
 
+console.log(123)
 
+var testNames = [
+    { value: 0, label: 'Example Rubric' },
+    { value: 1, label: 'Test' }
+  ];
+
+const styles = {
+    option: (provided, state) => ({
+      provided,
+      fontWeight: state.isSelected ? "bold" : "normal",
+      color: "black",
+      backgroundColor: state.data.color,
+      fontSize: state.selectProps.myFontSize
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: "#AE0000",
+      fontSize: state.selectProps.myFontSize
+    })
+  };
 
 var testRubrics = [
-    {
+    [{
         standard: "Evidence",
         desc1: "one",
         desc2: "two",
@@ -26,7 +47,29 @@ var testRubrics = [
         desc2: "two",
         desc3: "three",
         desc4: "four"
-    }
+    }],
+//Test rubric
+    [{
+        standard: "A",
+        desc1: "one",
+        desc2: "two",
+        desc3: "three",
+        desc4: "four"
+    },
+    {
+        standard: "B",
+        desc1: "one",
+        desc2: "two",
+        desc3: "three",
+        desc4: "four"
+    },
+    {
+        standard: "C",
+        desc1: "one",
+        desc2: "two",
+        desc3: "three",
+        desc4: "four"
+    }]
 ]
 
 //USE THIS TO FIND INDEX OF THE STANDARD
@@ -43,7 +86,11 @@ var newStandard = 0;
 
 function Table() {
     const location = useLocation();
+    const [savedNames, setNames] = useState(testNames);
     const [savedRubrics, setRubrics] = useState(testRubrics);
+    const [currentRubric, setCurrentRubric] = useState(testRubrics.at(0));
+    const [currentNum, setCurrentNum] = useState((testNames.at(0).value));
+    const [currentTitle, setCurrentTitle] = useState((testNames.at(0)).label);
     const [desc1, setDesc1] = useState('');
     const [desc2, setDesc2] = useState('');
     const [desc3, setDesc3] = useState('');
@@ -64,67 +111,135 @@ function Table() {
         testRubrics.push({standard: standard, desc1: desc1, desc2: desc2, desc3: desc3, desc4: desc4}); //Will need to tweak for database
         newStandard+=1;
         setRubrics(testRubrics);
-        location.reload();
+    }
+
+    const handleChange = (obj) => {
+        setCurrentNum(obj.value);
+        setCurrentTitle(obj.label);
+        setCurrentRubric(savedRubrics.at(obj.value));
+    }
+
+    //IN PROGRESS
+    const addRubric = () => {
+        savedRubrics.push([{
+            standard: "Default Standard",
+            desc1: "one",
+            desc2: "two",
+            desc3: "three",
+            desc4: "four"
+        }]);
+        savedNames.push({value: (savedNames.length), label: "New Rubric"});
+        setCurrentNum(savedNames.length - 1);
+        setCurrentTitle("New Rubric");
+        setCurrentRubric(savedRubrics.at(currentNum));
     }
 
     //Creates new empty row
-    const newRow = (event) => {
-        event.preventDefault();
-        testRubrics = savedRubrics;
-        testRubrics.push({standard: "New Standard ("+newStandard+")", desc1: "Enter Desc1", desc2: "Enter Desc2", desc3: "Enter Desc3", desc4: "Enter Desc4"}); //Will need to tweak for database
+    const newRow = () => {
+        let tempRubric = currentRubric;
+        tempRubric.push({standard: "New Standard ("+newStandard+")", desc1: "Enter Desc1", desc2: "Enter Desc2", desc3: "Enter Desc3", desc4: "Enter Desc4"}); //Will need to tweak for database
         newStandard+=1;
-        setRubrics(testRubrics);
-        location.reload();
+        setCurrentRubric(tempRubric);
+
+        //Update the saved rubrics
+        let tempRubrics = [];
+        if(savedRubrics.length > 1){
+            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric),(savedRubrics.slice(currentNum + 1, savedRubrics.length))));
+        }
+        else{
+            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric)));
+        }
+        setRubrics(tempRubrics)
     }
 
     //Enter edit mode
     const handleEdit = (standard) => {
         setEditStandard(standard);
-        let index = getSubIndex(savedRubrics, standard);
-        usetStandard((savedRubrics.at(index)).standard);
-        usetDesc1((savedRubrics.at(index)).desc1);
-        usetDesc2((savedRubrics.at(index)).desc2);
-        usetDesc3((savedRubrics.at(index)).desc3);
-        usetDesc4((savedRubrics.at(index)).desc4);
+        let index = getSubIndex(currentRubric, standard);
+        usetStandard((currentRubric.at(index)).standard);
+        usetDesc1((currentRubric.at(index)).desc1);
+        usetDesc2((currentRubric.at(index)).desc2);
+        usetDesc3((currentRubric.at(index)).desc3);
+        usetDesc4((currentRubric.at(index)).desc4);
+        
+    }
+    
+    const handleDelete = (standard) => {
+        let index = getSubIndex(currentRubric, standard);
+        let tempRubric = [];
+        if(currentRubric.length > 1){
+            tempRubric = (currentRubric.slice(0, index)).concat((currentRubric.slice(index + 1, currentRubric.length)));
+        }
+        else{
+            tempRubric = (currentRubric.slice(0, index));
+        }
+        setCurrentRubric(tempRubric);
+
+        //Update the saved rubrics
+        let tempRubrics = [];
+        if(savedRubrics.length > 1){
+            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric),(savedRubrics.slice(currentNum + 1, savedRubrics.length))));
+        }
+        else{
+            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric)));
+        }
+        setRubrics(tempRubrics)
     }
 
     //Will need to tweak after adding database 
     //Update Editted contents
     const handleUpdate = (standard) => {
-        let index = getSubIndex(savedRubrics, standard);
-        let tempRubrics = [];
-        tempRubrics = (savedRubrics.slice(0, index)).concat(({standard: standard, desc1: udesc1, desc2: udesc2, desc3: udesc3, desc4: udesc4}),(savedRubrics.slice(index + 1, savedRubrics.length)));
+        let index = getSubIndex(currentRubric, standard);
+        let tempRubric = [];
+        tempRubric = (currentRubric.slice(0, index)).concat(({standard: standard, desc1: udesc1, desc2: udesc2, desc3: udesc3, desc4: udesc4}),(currentRubric.slice(index + 1, currentRubric.length)));
         setEditStandard('void')
-        setRubrics(tempRubrics);
+        setCurrentRubric(tempRubric);
+
+        //Update the saved rubrics
+        let tempRubrics = [];
+        if(savedRubrics.length > 1){
+            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric),(savedRubrics.slice(currentNum + 1, savedRubrics.length))));
+        }
+        else{
+            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric)));
+        }
+        setRubrics(tempRubrics)
     }
 
     return (
         <div><p>
-            Test: {getSubIndex(savedRubrics, "Complication")}
+            Test: {getSubIndex(currentRubric, "Complication")}
             </p>
+            <h2>
+            <Select
+                onChange={handleChange}
+                options={savedNames}
+                styles={styles}
+            />
+            </h2>
             <table>
                     {
-                        savedRubrics.map((rubric) => (
+                        currentRubric.map((rubric) => (
                             rubric.standard === editStandard ?
                             <tbody>
                                 <tr className='StandardRow'>
-                                   <th colSpan = "4"> <input type='text' value={ustandard} onChange={e => usetStandard(e.target.value)}></input> </th>
+                                   <th colSpan = "4"> <input type='text' className = "standardInputField" value={ustandard} onChange={e => usetStandard(e.target.value)}></input> </th>
                                     <th> Action </th>    
                                 </tr>
                                 <tr className='NumsRow'>
-                                    <td> 1 </td>
-                                    <td> 2 </td>
-                                    <td> 3 </td>
-                                    <td> 4 </td>
-                                    <td>   </td>
+                                    <td className = "rubrow1"> 1 </td>
+                                    <td className = "rubrow2"> 2 </td>
+                                    <td className = "rubrow3"> 3 </td>
+                                    <td className = "rubrow4"> 4 </td>
+                                    <td className = "rubrow5">   </td>
                                 </tr>   
                                 <tr>
-                                    <td> <input type='text' value={udesc1} onChange={e => usetDesc1(e.target.value)}></input> </td>
-                                    <td> <input type='text' value={udesc2} onChange={e => usetDesc2(e.target.value)}></input> </td>
-                                    <td> <input type='text' value={udesc3} onChange={e => usetDesc3(e.target.value)}></input> </td>
-                                    <td> <input type='text' value={udesc4} onChange={e => usetDesc4(e.target.value)}></input> </td>
-                                    <td>
-                                        <button onClick={() => handleUpdate(editStandard)}> update </button>
+                                    <td className = "rubrow1"> <input type='text' className = "descInputField" value={udesc1} onChange={e => usetDesc1(e.target.value)}></input> </td>
+                                    <td className = "rubrow2"> <input type='text' className = "descInputField" value={udesc2} onChange={e => usetDesc2(e.target.value)}></input> </td>
+                                    <td className = "rubrow3"> <input type='text' className = "descInputField" value={udesc3} onChange={e => usetDesc3(e.target.value)}></input> </td>
+                                    <td className = "rubrow4"> <input type='text' className = "descInputField" value={udesc4} onChange={e => usetDesc4(e.target.value)}></input> </td>
+                                    <td className = "rubrow5">
+                                        <button className = "updateStandardButton" onClick={() => handleUpdate(editStandard)}> update </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -135,20 +250,20 @@ function Table() {
                                 <th> Action </th>    
                             </tr>
                             <tr className='NumsRow'>
-                                <td> 1 </td>
-                                <td> 2 </td>
-                                <td> 3 </td>
-                                <td> 4 </td>
-                                <td>   </td>
+                                <td className = "rubrow1"> 1 </td>
+                                <td className = "rubrow2"> 2 </td>
+                                <td className = "rubrow3"> 3 </td>
+                                <td className = "rubrow4"> 4 </td>
+                                <td className = "rubrow5">   </td>
                             </tr>   
                             <tr>
-                                <td> {rubric.desc1} </td>
-                                <td> {rubric.desc2} </td>
-                                <td> {rubric.desc3} </td>
-                                <td> {rubric.desc4} </td>
-                                <td>
-                                    <button onClick={() => handleEdit(rubric.standard)}> edit </button>
-                                    <button> delete </button>
+                                <td className = "rubrow1"> {rubric.desc1} </td>
+                                <td className = "rubrow2"> {rubric.desc2} </td>
+                                <td className = "rubrow3"> {rubric.desc3} </td>
+                                <td className = "rubrow4"> {rubric.desc4} </td>
+                                <td className = "rubrow5">
+                                    <button className = "editStandardButton" onClick={() => handleEdit(rubric.standard)}> edit </button>
+                                    <button className = "deleteStandardButton"  onClick={() => handleDelete(rubric.standard)}> delete </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -156,11 +271,7 @@ function Table() {
                     }
             </table>
             <div>
-            <form onSubmit={newRow}>
-                    <h2>
-                    <button type = "submit" value = "submit" className='addStandardButton'> Add Row </button>
-                    </h2>
-                </form>
+                    <button type = "submit" value = "submit" className='addStandardButton' onClick={() => newRow()}> Add Row </button>
             </div>
 
             <div>
