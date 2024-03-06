@@ -85,7 +85,6 @@ function getSubIndex(array, stand){
 var newStandard = 0;
 
 function Table() {
-    const location = useLocation();
     const [savedNames, setNames] = useState(testNames);
     const [savedRubrics, setRubrics] = useState(testRubrics);
     const [currentRubric, setCurrentRubric] = useState(testRubrics.at(0));
@@ -113,7 +112,7 @@ function Table() {
         setRubrics(testRubrics);
     }
 
-    const handleChange = (obj) => {
+    const decideRubric = (obj) => {
         setCurrentNum(obj.value);
         setCurrentTitle(obj.label);
         setCurrentRubric(savedRubrics.at(obj.value));
@@ -191,8 +190,8 @@ function Table() {
     const handleUpdate = (standard) => {
         let index = getSubIndex(currentRubric, standard);
         let tempRubric = [];
-        tempRubric = (currentRubric.slice(0, index)).concat(({standard: standard, desc1: udesc1, desc2: udesc2, desc3: udesc3, desc4: udesc4}),(currentRubric.slice(index + 1, currentRubric.length)));
-        setEditStandard('void')
+        tempRubric = (currentRubric.slice(0, index)).concat(({standard: ustandard, desc1: udesc1, desc2: udesc2, desc3: udesc3, desc4: udesc4}),(currentRubric.slice(index + 1, currentRubric.length)));
+        setEditStandard('void');
         setCurrentRubric(tempRubric);
 
         //Update the saved rubrics
@@ -201,9 +200,9 @@ function Table() {
             tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric),(savedRubrics.slice(currentNum + 1, savedRubrics.length))));
         }
         else{
-            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric)));
+            tempRubrics.push(currentRubric);
         }
-        setRubrics(tempRubrics)
+        setRubrics(tempRubrics);
     }
 
     return (
@@ -212,7 +211,7 @@ function Table() {
             </p>
             <h2>
             <Select
-                onChange={handleChange}
+                onChange={decideRubric}
                 options={savedNames}
                 styles={styles}
             />
