@@ -4,7 +4,6 @@ import {useEffect, useState} from 'react';
 import Select from 'react-select';
 import ReactDOM from 'react-dom/client';
 
-console.log(123)
 
 var testNames = [
     { value: 0, label: 'Example Rubric' },
@@ -135,18 +134,37 @@ function Table() {
 
     //Creates new empty row
     const newRow = () => {
+        console.log(savedRubrics);
         let tempRubric = currentRubric;
         tempRubric.push({standard: "New Standard ("+newStandard+")", desc1: "Enter Desc1", desc2: "Enter Desc2", desc3: "Enter Desc3", desc4: "Enter Desc4"}); //Will need to tweak for database
         newStandard+=1;
         setCurrentRubric(tempRubric);
+        console.log(savedRubrics);
 
         //Update the saved rubrics
         let tempRubrics = [];
+        let arr = {};
         if(savedRubrics.length > 1){
-            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric),(savedRubrics.slice(currentNum + 1, savedRubrics.length))));
+            console.log(savedRubrics);
+            if(currentNum!=0){
+                for(let i = 1; i < currentNum; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                }
+                tempRubrics.push(currentRubric);
+                for(let i = currentNum + 1; i < savedRubrics.length; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                }
+            }
+            else{
+                tempRubrics.push((currentRubric));
+                for(let i = 1; i < savedRubrics.length; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                }
+            }
+            console.log(tempRubrics);
         }
         else{
-            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric)));
+            tempRubrics.push(currentRubric);
         }
         setRubrics(tempRubrics)
     }
@@ -207,7 +225,7 @@ function Table() {
 
     return (
         <div><p>
-            Test: {getSubIndex(currentRubric, "Complication")}
+            
             </p>
             <h2>
             <Select
