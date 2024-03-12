@@ -13,10 +13,10 @@ app.get('/message', (req, res) => {
 
 var mysql = require('mysql');
   var con = mysql.createConnection({
-  host: "localhost:3306",
-  user: "root",
-  password: "AP_FRQ$2024!",
-  database: "APFRQ_Database"
+  host: "db.redhawks.us",
+  user: "redhawks_rubric",
+  password: "IuPzUwXxq0bll6r",
+  database: "redhawks_rubric"
 });
 
 
