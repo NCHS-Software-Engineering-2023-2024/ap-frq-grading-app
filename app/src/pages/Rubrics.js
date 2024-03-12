@@ -102,7 +102,8 @@ function Table() {
     const [udesc4, usetDesc4] = useState('');
     const [ustandard, usetStandard] = useState('');
 
-    //Creates new preset row -- Will remove after everythings working more st
+    //Creates new preset row -- Will remove after everythings working more 
+    /* 
     const handleSubmit = (event) => {
         event.preventDefault();
         testRubrics = savedRubrics;
@@ -110,6 +111,7 @@ function Table() {
         newStandard+=1;
         setRubrics(testRubrics);
     }
+    */
 
     const decideRubric = (obj) => {
         setCurrentNum(obj.value);
@@ -119,35 +121,70 @@ function Table() {
 
     //IN PROGRESS
     const addRubric = () => {
-        savedRubrics.push([{
+        let tempRubric = ([{
             standard: "Default Standard",
             desc1: "one",
             desc2: "two",
             desc3: "three",
             desc4: "four"
         }]);
-        savedNames.push({value: (savedNames.length), label: "New Rubric"});
-        setCurrentNum(savedNames.length - 1);
+        setCurrentNum(savedNames.length);
         setCurrentTitle("New Rubric");
-        setCurrentRubric(savedRubrics.at(currentNum));
+        setCurrentRubric(tempRubric);
+        
+        savedRubrics.push(tempRubric);
+        savedNames.push({value: (savedNames.length), label: "New Rubric"});
+        console.log(savedRubrics);
+    }
+
+    const deleteRubric = () => {
+        var num = 99;
+        if(currentNum!== 0){
+            num = savedNames.length - 2
+        }
+        else{
+            num = 1;
+        }
+        setCurrentNum(num);
+        setCurrentTitle(savedNames.at(num).label);
+        setCurrentRubric(savedRubrics.at(num));
+
+        let tempRubrics = [];
+        let tempNames = []
+        if(savedRubrics.length > 1){
+            if(currentNum!==0){
+                for(let i = 0; i < currentNum; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                    tempNames.push(savedNames.at(i));
+                }
+                for(let i = currentNum + 1; i < savedRubrics.length; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                    tempNames.push(savedNames.at(i));
+                }
+            }
+            else{
+                for(let i = 1; i < savedRubrics.length; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                    tempNames.push(savedNames.at(i));
+                }
+            }
+        }
+        setRubrics(tempRubrics)
+        setNames(tempNames)
     }
 
     //Creates new empty row
     const newRow = () => {
-        console.log(savedRubrics);
         let tempRubric = currentRubric;
         tempRubric.push({standard: "New Standard ("+newStandard+")", desc1: "Enter Desc1", desc2: "Enter Desc2", desc3: "Enter Desc3", desc4: "Enter Desc4"}); //Will need to tweak for database
         newStandard+=1;
         setCurrentRubric(tempRubric);
-        console.log(savedRubrics);
 
         //Update the saved rubrics
         let tempRubrics = [];
-        let arr = {};
         if(savedRubrics.length > 1){
-            console.log(savedRubrics);
-            if(currentNum!=0){
-                for(let i = 1; i < currentNum; i++){
+            if(currentNum!==0){
+                for(let i = 0; i < currentNum; i++){
                     tempRubrics.push(savedRubrics.at(i));
                 }
                 tempRubrics.push(currentRubric);
@@ -161,7 +198,6 @@ function Table() {
                     tempRubrics.push(savedRubrics.at(i));
                 }
             }
-            console.log(tempRubrics);
         }
         else{
             tempRubrics.push(currentRubric);
@@ -195,10 +231,24 @@ function Table() {
         //Update the saved rubrics
         let tempRubrics = [];
         if(savedRubrics.length > 1){
-            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric),(savedRubrics.slice(currentNum + 1, savedRubrics.length))));
+            if(currentNum!==0){
+                for(let i = 0; i < currentNum; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                }
+                tempRubrics.push(tempRubric);
+                for(let i = currentNum + 1; i < savedRubrics.length; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                }
+            }
+            else{
+                tempRubrics.push((tempRubric));
+                for(let i = 1; i < savedRubrics.length; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                }
+            }
         }
         else{
-            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric)));
+            tempRubrics.push(tempRubric);
         }
         setRubrics(tempRubrics)
     }
@@ -215,12 +265,26 @@ function Table() {
         //Update the saved rubrics
         let tempRubrics = [];
         if(savedRubrics.length > 1){
-            tempRubrics.push((savedRubrics.slice(0, currentNum)).concat((currentRubric),(savedRubrics.slice(currentNum + 1, savedRubrics.length))));
+            if(currentNum!==0){
+                for(let i = 0; i < currentNum; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                }
+                tempRubrics.push(tempRubric);
+                for(let i = currentNum + 1; i < savedRubrics.length; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                }
+            }
+            else{
+                tempRubrics.push((tempRubric));
+                for(let i = 1; i < savedRubrics.length; i++){
+                    tempRubrics.push(savedRubrics.at(i));
+                }
+            }
         }
         else{
-            tempRubrics.push(currentRubric);
+            tempRubrics.push(tempRubric);
         }
-        setRubrics(tempRubrics);
+        setRubrics(tempRubrics)
     }
 
     return (
@@ -292,16 +356,11 @@ function Table() {
             </div>
 
             <div>
-                <form onSubmit={handleSubmit}>
-                    <h2>
-                    <input type = "text" placeholder="Enter Standard" onChange={e => setStandard(e.target.value)}></input>
-                    <input type = "text" placeholder="Enter Desc1" onChange={e => setDesc1(e.target.value)}></input>
-                    <input type = "text" placeholder="Enter Desc2" onChange={e => setDesc2(e.target.value)}></input>
-                    <input type = "text" placeholder="Enter Desc3" onChange={e => setDesc3(e.target.value)}></input>
-                    <input type = "text" placeholder="Enter Desc4" onChange={e => setDesc4(e.target.value)}></input>
-                    <button type = "submit" value = "submit" className='addStandardButton'> Add </button>
-                    </h2>
-                </form>
+                    <button type = "submit" value = "submit" className='addStandardButton' onClick={() => addRubric()}> Add Rubric </button>
+            </div>
+
+            <div>
+                    <button type = "submit" value = "submit" className='deleteStandardButton' onClick={() => deleteRubric()}> Delete Rubric </button>
             </div>
         </div>
     )
@@ -321,12 +380,28 @@ function AddStandard(Rubric) {
 
     Standard1.innerHTML = "NEW CELL1";                                    
 }
+
+
+
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <h2>
+                    <input type = "text" placeholder="Enter Standard" onChange={e => setStandard(e.target.value)}></input>
+                    <input type = "text" placeholder="Enter Desc1" onChange={e => setDesc1(e.target.value)}></input>
+                    <input type = "text" placeholder="Enter Desc2" onChange={e => setDesc2(e.target.value)}></input>
+                    <input type = "text" placeholder="Enter Desc3" onChange={e => setDesc3(e.target.value)}></input>
+                    <input type = "text" placeholder="Enter Desc4" onChange={e => setDesc4(e.target.value)}></input>
+                    <button type = "submit" value = "submit" className='addStandardButton'> Add </button>
+                    </h2>
+                </form>
+            </div>
 */
 
 export default function Rubrics() {
     
     const navigate = useNavigate();
-    const [title, setTitle] = useState("Example Rubric");
+    const [title, setTitle] = useState("")
+
 
     return (
 
