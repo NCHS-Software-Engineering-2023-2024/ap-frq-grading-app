@@ -62,7 +62,7 @@
   cursor: pointer;
 }
 
-
+/*
 .ConfirmTitleButton {
   background-color: lightcoral;
   border: none;
@@ -73,7 +73,7 @@
   font-size: 24px;
   margin: 50px 2px;
   cursor: pointer;
-}
+}*/
 
 .updateStandardButton {
   background-color: lightcoral;
@@ -114,6 +114,45 @@
   margin: 0px 5px;
   cursor: pointer;
   font-weight: bold;
+}
+
+.addRowButton {
+  background-color: lightcoral;
+  border: black;
+  color: black;
+  padding: 15px 35px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 24px;
+  margin: 0px 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.addRubricButton {
+  background-color: lightcoral;
+  border: black;
+  color: rgb(0, 0, 0);
+  padding: 15px 35px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 28px;
+  margin: auto;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.deleteRubricButton {
+  background-color: rgb(190, 0, 0);
+  border: black;
+  color: rgb(0, 0, 0);
+  padding: 15px 35px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 28px;
+  margin: auto;
+  cursor: pointer;
+  font-weight: bolder;
 }
 
 .descInputField {
@@ -175,8 +214,8 @@ table, th, td, tr {
   text-align: center;
   width: 65%;
   border-collapse: collapse;
-  margin: 50px 450px;
-  padding: 15px 32px;
+  margin: 50px 50px;
+  padding: 10px 0px;
   border: 3px solid;
   font-family: 'Times New Roman', Times, serif;
   font-size: 24px;

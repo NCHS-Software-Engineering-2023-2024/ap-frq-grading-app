@@ -22,7 +22,12 @@ const styles = {
       ...provided,
       color: "#AE0000",
       fontSize: state.selectProps.myFontSize
-    })
+    }),
+    menu: (base) => ({
+        ...base,
+        width: "max-content",
+        minWidth: "100%"
+   })
   };
 
 var testRubrics = [
@@ -89,6 +94,7 @@ function Table() {
     const [currentRubric, setCurrentRubric] = useState(testRubrics.at(0));
     const [currentNum, setCurrentNum] = useState((testNames.at(0).value));
     const [currentTitle, setCurrentTitle] = useState((testNames.at(0)).label);
+
     const [desc1, setDesc1] = useState('');
     const [desc2, setDesc2] = useState('');
     const [desc3, setDesc3] = useState('');
@@ -287,6 +293,15 @@ function Table() {
         setRubrics(tempRubrics)
     }
 
+    const updateTitle = (newTitle) => {
+        var tempNames = [];
+        for (let i = 0; i<savedNames.length ; i++){
+            tempNames.push(savedNames.at(i));
+        }
+        tempNames.at(currentNum).label = newTitle;
+        setNames(tempNames);
+    }
+
     return (
         <div><p>
             
@@ -298,6 +313,24 @@ function Table() {
                 styles={styles}
             />
             </h2>
+
+
+            <div>
+                <body style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
+                    <button type = "submit" value = "submit" className='addRubricButton' onClick={() => addRubric()}> Add Rubric </button>
+
+                    <input type="text" id="Title" name="RubricTitle" placeholder="Enter Title Here"  value={savedNames.at(currentNum).label} className = "RubricTitleInput"
+                        onChange={() => updateTitle(document.getElementById('Title').value)}
+                    ></input>
+
+                    <button type = "submit" value = "submit" className='deleteRubricButton' onClick={() => deleteRubric()}> Delete Rubric </button>
+                </body>
+            </div>
+
             <table>
                     {
                         currentRubric.map((rubric) => (
@@ -352,16 +385,15 @@ function Table() {
                     }
             </table>
             <div>
-                    <button type = "submit" value = "submit" className='addStandardButton' onClick={() => newRow()}> Add Row </button>
+                <body style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
+                    <button type = "submit" value = "submit" className='addRowButton' onClick={() => newRow()}> Add Row </button>
+                </body>
             </div>
 
-            <div>
-                    <button type = "submit" value = "submit" className='addStandardButton' onClick={() => addRubric()}> Add Rubric </button>
-            </div>
-
-            <div>
-                    <button type = "submit" value = "submit" className='deleteStandardButton' onClick={() => deleteRubric()}> Delete Rubric </button>
-            </div>
         </div>
     )
 }
@@ -400,7 +432,6 @@ function AddStandard(Rubric) {
 export default function Rubrics() {
     
     const navigate = useNavigate();
-    const [title, setTitle] = useState("")
 
 
     return (
@@ -411,7 +442,6 @@ export default function Rubrics() {
 
             
             <>
-            <h1 className = "RubricTitle">{title}</h1>
 
             <body style={{
                 display: "flex",
@@ -419,13 +449,7 @@ export default function Rubrics() {
                 alignItems: "center"
             }}>
                 
-            <input type="text" id="Title" name="RubricTitle" placeholder="Enter Title Here"  className = "RubricTitleInput"></input>
             
-            <button
-                type="button"
-                onClick={() => setTitle(document.getElementById('Title').value)}
-                className="ConfirmTitleButton"
-            >Confirm</button>
 
             </body>
             </>
