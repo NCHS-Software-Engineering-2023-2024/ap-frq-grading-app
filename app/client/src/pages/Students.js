@@ -12,7 +12,9 @@ export default function Students() {
                 justifyContent: "center",
                 alignItems: "center"
             }}>
-                <h1> STUDENTS </h1>
+                <button className="DashboardButton" onClick={() => navigate('/students/new')}>New Student</button>
+                <button className="DashboardButton" onClick={() => navigate('/students/view')}>My Classes</button>
+                <button className="DashboardButton" onClick={() => navigate('/students/upload')}>Upload Classes</button>
             </body>
         </div>
     )
