@@ -2,7 +2,7 @@ import Header from '../components/Header';
 import PageHeader from '../components/PageHeader';
 import { useNavigate } from 'react-router-dom';
 
-export default function Logout() {
+export default function Login() {
     const navigate = useNavigate();
     return (
         <div>

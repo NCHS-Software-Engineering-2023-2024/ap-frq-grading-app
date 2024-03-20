@@ -8,8 +8,8 @@ import Info from './pages/Info';
 import Rubrics from './pages/Rubrics';
 import Students from './pages/Students';
 import Assignments from './pages/Assignments';
-import NewRubric from './pages/rubricpages/NewRubric';
-import ViewSavedRubrics from './pages/rubricpages/ViewSavedRubrics';
+import NewRubric from './pages/rubricPages/NewRubric';
+import ViewSavedRubrics from './pages/rubricPages/ViewSavedRubrics';
 
 function App() {
   return (
