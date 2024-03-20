@@ -1,7 +1,7 @@
 import PageHeader from '../../components/PageHeader';
 import { useNavigate } from 'react-router-dom';
 
-export default function Rubrics() {
+export default function UploadClass() {
     const navigate = useNavigate();
     return (
         <div>
