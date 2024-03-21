@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.1",
+    "json-server": "^1.0.0-alpha.23",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.2"
+  }
+}

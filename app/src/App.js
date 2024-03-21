@@ -9,6 +9,8 @@ import Rubrics from './pages/Rubrics';
 import Students from './pages/Students';
 import Assignments from './pages/Assignments';
 
+
+
 function App() {
   return (
     <div>
