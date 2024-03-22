@@ -28,6 +28,22 @@ app.get('/rubrics', (req, res) => {
   })
 });
 
+
+app.post('/api/students', (req, res) => {
+  const { firstName, lastName } = req.body;
+  if (!firstName || !lastName) {
+    return res.status(400).json({ message: 'Please provide both first name and last name' });
+  }
+  const query = 'INSERT INTO students (firstName, lastName) VALUES (?, ?)';
+  db.query(query, [firstName, lastName], (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.status(201).json({ message: 'Student added successfully' });
+  });
+});
+
+
 app.listen(8000, () => {
     console.log(`Server is running on port 8000.`);
   });
