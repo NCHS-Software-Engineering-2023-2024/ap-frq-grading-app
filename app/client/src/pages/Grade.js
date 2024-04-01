@@ -13,6 +13,11 @@ export default function Grade() {
         { value: 'class1', label: 'Period 1' },
         { value: 'class2', label: 'Period 2' },
         { value: 'class3', label: 'Period 3' },
+        { value: 'class4', label: 'Period 4'},
+        { value: 'class5', label: 'Period 5' },
+        { value: 'class6', label: 'Period 6' },
+        { value: 'class7', label: 'Period 7' },
+        { value: 'class8', label: 'Period 8' }
     ];
 
     const [selectedOpt, setSelectedOpt] = useState(null);

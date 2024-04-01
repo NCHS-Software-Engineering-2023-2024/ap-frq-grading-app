@@ -28,6 +28,18 @@ app.get('/rubrics', (req, res) => {
   })
 });
 
+app.post('/generate-grade', (req, res) => {
+  // will add class period and rubric after as well
+  const { gradeID, firstName, lastName, assignmentName} = req.body;
+
+  const sql = `INSERT INTO grade (gradeID, firstName, lastName, assignmentName) VALUES (?, ?, ?)`;
+  con.query(sql, [gradeID, firstName, lastName, assignmentName], (err, result) => {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+})
+
+
 app.listen(8000, () => {
     console.log(`Server is running on port 8000.`);
   });
