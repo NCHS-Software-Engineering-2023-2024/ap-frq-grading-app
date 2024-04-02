@@ -32,9 +32,12 @@ app.post('/generate-grade', (req, res) => {
   // will add class period and rubric after as well
   const { gradeID, firstName, lastName, assignmentName} = req.body;
 
-  const sql = `INSERT INTO grade (gradeID, firstName, lastName, assignmentName) VALUES (?, ?, ?)`;
+  const sql = `INSERT INTO grade (firstName, lastName, assignmentName) VALUES (?, ?, ?)`;
   con.query(sql, [gradeID, firstName, lastName, assignmentName], (err, result) => {
-    if (err) return res.json(err);
+    if (err) {
+      console.error('Error executing SQL:', err);
+      return res.status(500).json({ error: 'Failed to add grade' });
+    }
     return res.json(result);
   });
 })
