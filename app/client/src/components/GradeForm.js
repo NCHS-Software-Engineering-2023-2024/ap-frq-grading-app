@@ -12,13 +12,13 @@ const GradeForm = ({ classPeriod }) => {
 
   // This is where we would access the rubrics table
   const options = [
-    { value: 'base', label: 'Select...' },
-    { value: 'rubric1', label: 'AP Lang' },
-    { value: 'rubric2', label: 'AP Lit Poetry' },
-    { value: 'rubric3', label: 'AP Lit Fiction' },
+    { value: '0', label: 'Select...' },
+    { value: '1', label: 'AP Lang' },
+    { value: '2', label: 'AP Lit Poetry' },
+    { value: '3', label: 'AP Lit Fiction' },
   ];
 
-  const [selectedOpt, setSelectedOpt] = useState(null);
+  const [selectedRubric, setSelectedOpt] = useState(null);
   const [data, setData] = useState(null);
 
   const handleChange = (selected) => {
@@ -30,15 +30,17 @@ const GradeForm = ({ classPeriod }) => {
     e.preventDefault();
     try {
       // Post form data to the server
-      const response = await fetch('/generate-grade', {
+      const response = await fetch('http://localhost:8000/generate-grade', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          classPeriod,
+          selectedRubric,
           firstName,
           lastName,
-          assignmentName
+          assignmentName,
         })
       });
   
