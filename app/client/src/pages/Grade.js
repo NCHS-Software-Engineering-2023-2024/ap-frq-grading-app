@@ -22,11 +22,15 @@ export default function Grade() {
 
     const [selectedOpt, setSelectedOpt] = useState(null);
     const [data, setData] = useState(null);
+    var classPeriod = "";
 
     const handleChange = (selected) => {
         setSelectedOpt(selected);
         console.log(`Option selected:`, selected);
+        classPeriod = selected.value;
+        console.log("Class Period: " + classPeriod);
     }
+
 
     return (
         <div>
@@ -44,9 +48,30 @@ export default function Grade() {
                     <Select options={options} onChange={handleChange}/>
                 </div>
                 <br/>
-                <div style={{ display: selectedOpt && selectedOpt.value === 'base' ? 'none' : 'flex' }}>
-                    <GradeForm classPeriod={selectedOpt} />
-                </div>
+                {selectedOpt && selectedOpt.value === '1' && (
+                    <GradeForm classPeriod="1" />
+                )}
+                {selectedOpt && selectedOpt.value === '2' && (
+                    <GradeForm classPeriod="2" />
+                )}
+                {selectedOpt && selectedOpt.value === '3' && (
+                    <GradeForm classPeriod="3" />
+                )}
+                {selectedOpt && selectedOpt.value === '4' && (
+                    <GradeForm classPeriod="4" />
+                )}
+                {selectedOpt && selectedOpt.value === '5' && (
+                    <GradeForm classPeriod="5" />
+                )}
+                {selectedOpt && selectedOpt.value === '6' && (
+                    <GradeForm classPeriod="6" />
+                )}
+                {selectedOpt && selectedOpt.value === '7' && (
+                    <GradeForm classPeriod="7" />
+                )}
+                {selectedOpt && selectedOpt.value === '8' && (
+                    <GradeForm classPeriod="8" />
+                )}
             </body>
         </div>
     )

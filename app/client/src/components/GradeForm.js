@@ -18,7 +18,7 @@ const GradeForm = ({ classPeriod }) => {
     { value: '3', label: 'AP Lit Fiction' },
   ];
 
-  const [selectedRubric, setSelectedOpt] = useState(null);
+  const [selectedRubric, setSelectedOpt] = useState('');
   const [data, setData] = useState(null);
 
   const handleChange = (selected) => {
@@ -37,20 +37,25 @@ const GradeForm = ({ classPeriod }) => {
         },
         body: JSON.stringify({
           classPeriod,
-          selectedRubric,
+          //selectedRubric,
           firstName,
           lastName,
           assignmentName,
         })
       });
+
+      console.log("First: " + firstName);
+      console.log("Last: " + lastName);
+      console.log("Assignment: " + assignmentName);
+      //console.log("Rubric: " + selectedRubric.value);
+      console.log("Class Period: " + classPeriod);
+
   
       if (!response.ok) {
         throw new Error('Failed to add student');
       }
 
-      console.log("First: " + firstName);
-      console.log("Last: " + lastName);
-      console.log("Assignment: " + assignmentName);
+
 
       // Navigate to new grade
       navigate("/grade/new");
