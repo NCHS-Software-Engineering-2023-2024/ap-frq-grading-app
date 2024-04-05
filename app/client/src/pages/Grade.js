@@ -21,7 +21,6 @@ export default function Grade() {
     ];
 
     const [selectedOpt, setSelectedOpt] = useState(null);
-    const [data, setData] = useState(null);
     var classPeriod = "";
 
     const handleChange = (selected) => {
