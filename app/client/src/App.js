@@ -10,6 +10,8 @@ import Students from './pages/Students';
 import Assignments from './pages/Assignments';
 import NewRubric from './pages/rubricPages/NewRubric';
 import ViewSavedRubrics from './pages/rubricPages/ViewSavedRubrics';
+import Grade from './pages/Grade';
+import RubricGrade from './pages/gradePages/RubricGrade';
 
 function App() {
   return (
@@ -19,11 +21,17 @@ function App() {
           <Route path ="/" element={<Login />} />
           <Route path="/home" element={<Dashboard />} />
           <Route path="/info" element={<Info />} />
+
           <Route path="/rubrics" element={<Rubrics />} />
           <Route path="/rubrics/new" element={<NewRubric />} />
           <Route path="/rubrics/view" element={<ViewSavedRubrics />} />
+
           <Route path ="/students" element={<Students />} />
+
           <Route path ="/assignments" element={<Assignments/>} />
+
+          <Route path="/grade" element={<Grade />} />
+          <Route path="/grade/new" element={<RubricGrade/>} />
         </Routes>
       </BrowserRouter>
 

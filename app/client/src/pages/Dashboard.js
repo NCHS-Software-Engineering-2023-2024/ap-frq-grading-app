@@ -23,6 +23,10 @@ export default function Dashboard() {
                 <button onClick={()=>navigate("/assignments")} className="DashboardButton">
                     Assignments
                 </button>
+
+                <button onClick={()=>navigate("/grade")} className="DashboardButton">
+                    Grade
+                </button>
             </body>
         </div>
     )
