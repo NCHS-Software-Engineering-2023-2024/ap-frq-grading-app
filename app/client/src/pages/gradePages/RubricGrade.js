@@ -4,9 +4,9 @@ import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader';
 
-const GradeForm = ({classPeriod}) => {
+const RubricGrade = ({classPeriod}) => {
     return (
         <PageHeader headerName="Grade Assignment" toNavigate="/grade"/>
     );
 };
-export default GradeForm;
+export default RubricGrade;
