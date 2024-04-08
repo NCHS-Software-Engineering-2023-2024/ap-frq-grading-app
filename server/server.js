@@ -30,7 +30,8 @@ var mysql = require('mysql2');
         password: "IuPzUwXxq0bll6r",
         database: "redhawks_rubric"
       });
-
+    
+      /*
     con.connect(function(err) {
         if (err) throw err;
         console.log("Connected!");
@@ -39,7 +40,17 @@ var mysql = require('mysql2');
             const data = result;
             console.log(data);
         });
-    });
+    });*/
+
+app.get('/rubrics', (req, res) => {
+  const sql = "SELECT rubric.rubricName AS rubricTitle, rubric.RubricID AS rubricNum, standard.standardName as standard, cell.idStandard AS standardNum, cell.cellNum, cell.cellDesc FROM cell INNER JOIN standard ON cell.idStandard = standard.idStandard JOIN rubric ON standard.idRubric = rubric.RubricID;";
+  con.query(sql, (err, data) => {
+    console.log(data);
+    if (err) return res.json(err);
+    return res.json(data);
+  })
+});
+
 app.post('/message', (req, res) => {
     //res.json({ message: "Hello from server!" });
     
