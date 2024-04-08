@@ -34,7 +34,7 @@ var mysql = require('mysql2');
     con.connect(function(err) {
         if (err) throw err;
         console.log("Connected!");
-        con.query("SELECT rubric.rubricName, rubric.idRubric, standard.standardName, cell.idStandard, cell.cellNum, cell.cellDesc FROM cell INNER JOIN standard ON cell.idStandard = standard.idStandard JOIN rubric ON standard.idRubric = rubric.idRubric;", function (err, result, fields) {
+        con.query("SELECT rubric.rubricName, rubric.RubricID, standard.standardName, cell.idStandard, cell.cellNum, cell.cellDesc FROM cell INNER JOIN standard ON cell.idStandard = standard.idStandard JOIN rubric ON standard.idRubric = rubric.RubricID;", function (err, result, fields) {
             if (err) console.log(err);
             const data = result;
             console.log(data);
