@@ -42,7 +42,7 @@ var mysql = require('mysql2');
         });
     });*/
 
-app.get('/rubrics', (req, res) => {
+app.get('/rubricsInfo', (req, res) => {
   const sql = "SELECT rubric.rubricName AS rubricTitle, rubric.RubricID AS rubricNum, standard.standardName as standard, cell.idStandard AS standardNum, cell.cellNum, cell.cellDesc FROM cell INNER JOIN standard ON cell.idStandard = standard.idStandard JOIN rubric ON standard.idRubric = rubric.RubricID;";
   con.query(sql, (err, data) => {
     console.log(data);
@@ -61,6 +61,6 @@ app.post('/message', (req, res) => {
 
 // This will check if the server is running on port 8000
 // If you change the port number here, you also have to change the baseURL in App.js
-app.listen(3000, () => {
-    console.log(`Server is running on port 3000.`);
+app.listen(8000, () => {
+    console.log(`Server is running on port 8000.`);
   });
