@@ -95,11 +95,11 @@ function Table() {
     const [currentNum, setCurrentNum] = useState((testNames.at(0).value));
     const [currentTitle, setCurrentTitle] = useState((testNames.at(0)).label);
 
-    const [desc1, setDesc1] = useState('');
-    const [desc2, setDesc2] = useState('');
-    const [desc3, setDesc3] = useState('');
-    const [desc4, setDesc4] = useState('');
-    const [standard, setStandard] = useState('');
+    //const [desc1, setDesc1] = useState('');
+    //const [desc2, setDesc2] = useState('');
+    //const [desc3, setDesc3] = useState('');
+    //const [desc4, setDesc4] = useState('');
+    //const [standard, setStandard] = useState('');
     const [editStandard, setEditStandard] = useState('void')
 
     const [udesc1, usetDesc1] = useState('');
@@ -306,6 +306,9 @@ function Table() {
         <div><p>
             
             </p>
+
+            
+
             <h2>
             <Select
                 onChange={decideRubric}
@@ -431,7 +434,7 @@ function AddStandard(Rubric) {
 
 export default function Rubrics() {
     
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
 
     return (
