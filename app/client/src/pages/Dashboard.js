@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router-dom';
 
 export default function Dashboard() {
     const navigate = useNavigate();
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(sessionStorage.getItem('userId') !== null);
+
     return (
         <div >
             <Header />

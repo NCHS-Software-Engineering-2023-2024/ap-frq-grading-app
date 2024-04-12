@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
     const navigate = useNavigate();
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(sessionStorage.getItem('userId') !== null);
+
     return (
         <div className="App">
             <header className="App-header">

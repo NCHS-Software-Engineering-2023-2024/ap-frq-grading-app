@@ -4,6 +4,35 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
     const navigate = useNavigate();
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(sessionStorage.getItem('userId') !== null);
+
+    const handleDashboardClick = () => {
+        if (sessionStorage.getItem('userId') === null) {
+            setIsUserLoggedIn(false);
+            alert("You need to sign in first to view the dashboard");
+        } else {
+            setIsUserLoggedIn(true);
+            navigate("/home");
+        }
+    };
+
+    useEffect(() => {
+        setIsUserLoggedIn(sessionStorage.getItem('userId') !== null);
+    }, []);
+
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setIsUserLoggedIn(sessionStorage.getItem('userId') !== null);
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+
+        // Clean up the event listener when the component is unmounted
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
+
     return (
         <div>
             <body style={{
