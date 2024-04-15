@@ -96,6 +96,7 @@ function Table() {
     const [currentRubric, setCurrentRubric] = useState(testRubrics.at(0));
     const [currentNum, setCurrentNum] = useState((testNames.at(0).value));
     const [currentTitle, setCurrentTitle] = useState((testNames.at(0)).label);
+    const [initRubrics, setInitRubrics] = useState([])
 
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -103,8 +104,26 @@ function Table() {
         .then(res => setData(res.data))
         .catch(er => console.log(er));
         console.log(data);
+        organizeSQL(data);
     })
-    
+
+    const organizeSQL = (sql) => {
+        let tempRubrics = [];
+        const max = data.length();
+        let dataItem = 0;
+        for(i = 0; i < data; i++){
+            let thisRubric = [];
+            let maxrubricItem = 0;
+            while(data.at(maxrubricItem).rubricNum == i){
+                maxrubricItem++
+            }
+            for(i = 0; i <= data.at(maxrubricItem - 1).standardNum; i++){
+                thisRubric.push({standard: data.at(dataItem).standard, desc1: data.at(dataItem).cellDesc, desc2: data.at(dataItem + 1).cellDesc, desc3: data.at(dataItem + 2).cellDesc, desc4: data.at(dataItem + 3).cellDesc});
+                dataItem += 4;
+            }
+            tempRubrics.push(thisRubric);
+        }
+    }
 
     //const [desc1, setDesc1] = useState('');
     //const [desc2, setDesc2] = useState('');
