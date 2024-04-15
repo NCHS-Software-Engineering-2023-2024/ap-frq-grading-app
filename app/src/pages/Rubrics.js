@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {useEffect, useState} from 'react';
 import Select from 'react-select';
 import ReactDOM from 'react-dom/client';
+import axios from 'axios';
+
 
 
 var testNames = [
@@ -95,6 +97,15 @@ function Table() {
     const [currentNum, setCurrentNum] = useState((testNames.at(0).value));
     const [currentTitle, setCurrentTitle] = useState((testNames.at(0)).label);
 
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:8000/rubricsInfo')
+        .then(res => setData(res.data))
+        .catch(er => console.log(er));
+        console.log(data);
+    })
+    
+
     //const [desc1, setDesc1] = useState('');
     //const [desc2, setDesc2] = useState('');
     //const [desc3, setDesc3] = useState('');
@@ -105,7 +116,7 @@ function Table() {
     const [udesc1, usetDesc1] = useState('');
     const [udesc2, usetDesc2] = useState('');
     const [udesc3, usetDesc3] = useState('');
-    const [udesc4, usetDesc4] = useState('');
+    const [udesc4, usetDesc4] = useState('');   
     const [ustandard, usetStandard] = useState('');
 
     //Creates new preset row -- Will remove after everythings working more 
@@ -303,9 +314,7 @@ function Table() {
     }
 
     return (
-        <div><p>
-            
-            </p>
+        <div>
 
             
 
