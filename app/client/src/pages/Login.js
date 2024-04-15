@@ -1,6 +1,7 @@
 import Header from '../components/Header';
 import PageHeader from '../components/PageHeader';
 import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -19,6 +20,14 @@ export default function Login() {
     useEffect(() => {
         setIsUserLoggedIn(sessionStorage.getItem('userId') !== null);
     }, []);
+
+    const handleLogout = () => {
+        // Clear the session storage
+        sessionStorage.clear();
+        setIsUserLoggedIn(false);
+        // Redirect the user to the home page
+        navigate("/");
+      };
 
     useEffect(() => {
         const handleStorageChange = () => {
