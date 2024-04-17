@@ -101,28 +101,39 @@ function Table() {
     const [data, setData] = useState([]);
     useEffect(() => {
         axios.get('http://localhost:8000/rubricsInfo')
-        .then(res => setData(res.data))
+        .then(res => setData(organizeSQL(res.data)))
         .catch(er => console.log(er));
-        console.log(data);
-        organizeSQL(data);
+        //console.log(data);
+        //(data);
     })
 
     const organizeSQL = (sql) => {
         let tempRubrics = [];
-        const max = data.length();
         let dataItem = 0;
-        for(i = 0; i < data; i++){
+        console.log(sql);
+        for(let i = 0; i <= sql.at(11).rubricNum; i++){
+            let thisNames = [];
             let thisRubric = [];
             let maxrubricItem = 0;
-            while(data.at(maxrubricItem).rubricNum == i){
+            while(sql.at(maxrubricItem).rubricNum == i && maxrubricItem < sql.length - 1){
+                console.log("TEST " + maxrubricItem);
                 maxrubricItem++
             }
-            for(i = 0; i <= data.at(maxrubricItem - 1).standardNum; i++){
-                thisRubric.push({standard: data.at(dataItem).standard, desc1: data.at(dataItem).cellDesc, desc2: data.at(dataItem + 1).cellDesc, desc3: data.at(dataItem + 2).cellDesc, desc4: data.at(dataItem + 3).cellDesc});
-                dataItem += 4;
+
+            maxrubricItem--;
+
+            for(let j = 0; j <= sql.at(maxrubricItem - 1).standardNum; j++){
+                console.log(dataItem + ", " + maxrubricItem);
+                thisRubric.push({standard: sql.at(dataItem).standard, desc1: sql.at(dataItem).cellDesc, desc2: sql.at(dataItem + 1).cellDesc, desc3: sql.at(dataItem + 2).cellDesc, desc4: sql.at(dataItem + 3).cellDesc});
+                dataItem += 4;  
+                console.log("a");
             }
             tempRubrics.push(thisRubric);
+            console.log("b");
         }
+
+        
+        console.log(tempRubrics);
     }
 
     //const [desc1, setDesc1] = useState('');
