@@ -8,14 +8,29 @@ import Info from './pages/Info';
 import Rubrics from './pages/Rubrics';
 import Students from './pages/Students';
 import Assignments from './pages/Assignments';
-import NewRubric from './pages/rubricPages/NewRubric';
-import ViewSavedRubrics from './pages/rubricPages/ViewSavedRubrics';
+import NewRubric from './pages/rubricpages/NewRubric';
+import ViewSavedRubrics from './pages/rubricpages/ViewSavedRubrics';
 import Grade from './pages/Grade';
 import RubricGrade from './pages/gradePages/RubricGrade';
+import { GoogleLogin } from '@react-oauth/google';
+import { useEffect, useState } from "react";
 
 function App() {
+  const responseMessage = (response) => {
+    console.log(response);
+  };
+const errorMessage = (error) => {
+    console.log(error);
+  };
   return (
+
+    
     <div>
+      {/* <h2>React Google Login</h2>
+      <br />
+      <br />
+      <GoogleLogin onSuccess={responseMessage} onError={errorMessage} /> */}
+    
       <BrowserRouter>
         <Routes>
           <Route path ="/" element={<Login />} />
