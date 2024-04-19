@@ -5,3 +5,4 @@ Teachers can create standardized AP rubrics that have customizable standards. Th
 - Coming updates:
   - When the form is submitted, it will open the selected rubric in a format for grading and feedback.
   - Saving the customized rubrics to a database that can then be accessed by the aforementioned grading form.
+  - A Google Sign-in will be required to enter the site and use its features
