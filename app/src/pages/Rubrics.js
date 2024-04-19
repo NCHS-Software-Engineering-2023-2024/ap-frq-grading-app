@@ -91,12 +91,13 @@ function getSubIndex(array, stand){
 var newStandard = 0;
 
 function Table() {
-    const [savedNames, setNames] = useState(testNames);
+    const [savedNames, setNames] = useState([testNames]);
     const [savedRubrics, setRubrics] = useState(testRubrics);
     const [currentRubric, setCurrentRubric] = useState(testRubrics.at(0));
     const [currentNum, setCurrentNum] = useState((testNames.at(0).value));
     const [currentTitle, setCurrentTitle] = useState((testNames.at(0)).label);
     const [initRubrics, setInitRubrics] = useState([])
+    const [initNames, setInitNames] = useState([])
 
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -109,12 +110,16 @@ function Table() {
 
     const organizeSQL = (sql) => {
         let tempRubrics = [];
+        let tempNames = [];
         let dataItem = 0;
         console.log(sql);
         for(let i = 0; i <= sql.at(11).rubricNum; i++){
-            let thisNames = [];
+            let thisName = [];
             let thisRubric = [];
             let maxrubricItem = 0;
+
+            thisName.push({value: sql.at(dataItem).rubricNum, label: sql.at(dataItem).rubricTitle})
+
             while(sql.at(maxrubricItem).rubricNum == i && maxrubricItem < sql.length - 1){
                 console.log("TEST " + maxrubricItem);
                 maxrubricItem++
@@ -129,11 +134,21 @@ function Table() {
                 console.log("a");
             }
             tempRubrics.push(thisRubric);
+            tempNames.push(thisName);
             console.log("b");
         }
 
         
         console.log(tempRubrics);
+        console.log(tempNames);
+
+        setNames(tempNames);
+        setRubrics(tempRubrics);
+        setCurrentRubric(tempRubrics.at(0));
+        setCurrentNum(tempNames.at(0).value);
+        setCurrentTitle(tempNames.at(0).label);
+
+
     }
 
     //const [desc1, setDesc1] = useState('');
