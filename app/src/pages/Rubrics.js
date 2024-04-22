@@ -96,8 +96,9 @@ function Table() {
     const [currentRubric, setCurrentRubric] = useState(testRubrics.at(0));
     const [currentNum, setCurrentNum] = useState((testNames.at(0).value));
     const [currentTitle, setCurrentTitle] = useState((testNames.at(0)).label);
-    const [initRubrics, setInitRubrics] = useState([])
-    const [initNames, setInitNames] = useState([])
+    const [initRubrics, setInitRubrics] = useState([]);
+    const [initNames, setInitNames] = useState([]);
+    const [check, setCheck] = useState();
 
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -106,7 +107,9 @@ function Table() {
         .catch(er => console.log(er));
         //console.log(data);
         //(data);
-    })
+    }, [])
+
+    console.log(savedNames);
 
     const organizeSQL = (sql) => {
         let tempRubrics = [];
@@ -114,11 +117,11 @@ function Table() {
         let dataItem = 0;
         console.log(sql);
         for(let i = 0; i <= sql.at(11).rubricNum; i++){
-            let thisName = [];
+            //let thisName = [];
             let thisRubric = [];
             let maxrubricItem = 0;
 
-            thisName.push({value: sql.at(dataItem).rubricNum, label: sql.at(dataItem).rubricTitle})
+            tempNames.push({value: sql.at(dataItem).rubricNum, label: sql.at(dataItem).rubricTitle})
 
             while(sql.at(maxrubricItem).rubricNum == i && maxrubricItem < sql.length - 1){
                 console.log("TEST " + maxrubricItem);
@@ -134,7 +137,7 @@ function Table() {
                 console.log("a");
             }
             tempRubrics.push(thisRubric);
-            tempNames.push(thisName);
+            //tempNames.push(thisName);
             console.log("b");
         }
 
@@ -147,7 +150,6 @@ function Table() {
         setCurrentRubric(tempRubrics.at(0));
         setCurrentNum(tempNames.at(0).value);
         setCurrentTitle(tempNames.at(0).label);
-
 
     }
 
