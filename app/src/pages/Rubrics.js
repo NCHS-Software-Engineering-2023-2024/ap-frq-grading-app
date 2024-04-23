@@ -96,22 +96,67 @@ function Table() {
     const [currentRubric, setCurrentRubric] = useState(testRubrics.at(0));
     const [currentNum, setCurrentNum] = useState((testNames.at(0).value));
     const [currentTitle, setCurrentTitle] = useState((testNames.at(0)).label);
+    const [initSQL, setInitSQL] = useState([]);
     const [initRubrics, setInitRubrics] = useState([]);
     const [initNames, setInitNames] = useState([]);
-    const [check, setCheck] = useState();
+    //const [check, setCheck] = useState();
 
-    const [data, setData] = useState([]);
+    //const [data, setData] = useState([]);
     useEffect(() => {
         axios.get('http://localhost:8000/rubricsInfo')
-        .then(res => setData(organizeSQL(res.data)))
+        .then(res => organizeSQL(res.data))
         .catch(er => console.log(er));
         //console.log(data);
-        //(data);
     }, [])
 
-    console.log(savedNames);
+    console.log();
+
+    const turnSQL = () => {
+        let finalRubrics = savedRubrics;
+        let tempRubrics = [];
+        for(var i = 0; i < savedNames.length - 1; i++){
+            for(var j = 0; j < 12; j++){
+                let stand;
+                let standNum;
+                let cellText;
+
+                //FIND STANDARD NUM
+                if(j < 4){
+                    standNum = 0;
+                }
+                else if (j < 8){
+                    standNum = 1;
+                }
+                else{
+                    standNum = 2;
+                }
+
+                stand = savedRubrics.at(i).at(standNum).standard;
+
+                //FIND CELL DESC
+                if(j%4 + 1 == 1){
+                    cellText = savedRubrics.at(i).at(standNum).desc1;
+                }
+                if(j%4 + 1 == 2){
+                    cellText = savedRubrics.at(i).at(standNum).desc2;
+                }
+                if(j%4 + 1 == 3){
+                    cellText = savedRubrics.at(i).at(standNum).desc3;
+                }
+                else{
+                    cellText = savedRubrics.at(i).at(standNum).desc4;
+                }
+
+                tempRubrics.push({rubricTitle: savedNames.at(i).label, rubricNum: i, standard: stand, standardNum: standNum, cellNum: j%4 + 1, cellDesc: cellText})
+            }
+        }
+
+        console.log(initRubrics);
+        console.log(tempRubrics);
+    }
 
     const organizeSQL = (sql) => {
+        setInitSQL(sql);
         let tempRubrics = [];
         let tempNames = [];
         let dataItem = 0;
@@ -146,7 +191,9 @@ function Table() {
         console.log(tempNames);
 
         setNames(tempNames);
+        setInitNames(tempNames);
         setRubrics(tempRubrics);
+        setInitRubrics(tempRubrics);
         setCurrentRubric(tempRubrics.at(0));
         setCurrentNum(tempNames.at(0).value);
         setCurrentTitle(tempNames.at(0).label);
@@ -364,6 +411,7 @@ function Table() {
         <div>
 
             
+            <button className = "Save"  onClick={() => turnSQL()}> SAVE </button>
 
             <h2>
             <Select
