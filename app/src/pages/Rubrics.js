@@ -112,25 +112,17 @@ function Table() {
     console.log();
 
     const turnSQL = () => {
+        console.log("UNDER");
         let finalRubrics = savedRubrics;
         let tempRubrics = [];
-        for(var i = 0; i < savedNames.length - 1; i++){
-            for(var j = 0; j < 12; j++){
-                let stand;
-                let standNum;
-                let cellText;
-
-                //FIND STANDARD NUM
-                if(j < 4){
-                    standNum = 0;
-                }
-                else if (j < 8){
-                    standNum = 1;
-                }
-                else{
-                    standNum = 2;
-                }
-
+        for(var i = 0; i < savedNames.length; i++){
+            let standCount = savedRubrics.at(i).length;
+            for(var j = 0; j < 4 * standCount; j++){
+                let stand;  
+                let standNum = Math.trunc(j/4);
+                let cellText;                
+                
+                console.log("i: "+ i+ " standNum: "+ standNum + " standard" + savedRubrics.at(i).at(standNum).standard);
                 stand = savedRubrics.at(i).at(standNum).standard;
 
                 //FIND CELL DESC
@@ -153,6 +145,7 @@ function Table() {
 
         console.log(initRubrics);
         console.log(tempRubrics);
+        console.log("OVER");
     }
 
     const organizeSQL = (sql) => {
@@ -169,21 +162,21 @@ function Table() {
             tempNames.push({value: sql.at(dataItem).rubricNum, label: sql.at(dataItem).rubricTitle})
 
             while(sql.at(maxrubricItem).rubricNum == i && maxrubricItem < sql.length - 1){
-                console.log("TEST " + maxrubricItem);
+                //console.log("TEST " + maxrubricItem);
                 maxrubricItem++
             }
 
             maxrubricItem--;
 
             for(let j = 0; j <= sql.at(maxrubricItem - 1).standardNum; j++){
-                console.log(dataItem + ", " + maxrubricItem);
+                //console.log(dataItem + ", " + maxrubricItem);
                 thisRubric.push({standard: sql.at(dataItem).standard, desc1: sql.at(dataItem).cellDesc, desc2: sql.at(dataItem + 1).cellDesc, desc3: sql.at(dataItem + 2).cellDesc, desc4: sql.at(dataItem + 3).cellDesc});
                 dataItem += 4;  
-                console.log("a");
+                //console.log("a");
             }
             tempRubrics.push(thisRubric);
             //tempNames.push(thisName);
-            console.log("b");
+            //console.log("b");
         }
 
         
