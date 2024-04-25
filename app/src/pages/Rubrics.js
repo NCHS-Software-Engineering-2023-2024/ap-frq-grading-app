@@ -112,9 +112,9 @@ function Table() {
     console.log();
 
     const turnSQL = () => {
-        console.log("UNDER");
         let finalRubrics = savedRubrics;
         let tempRubrics = [];
+        let stoodNum = 0;
         for(var i = 0; i < savedNames.length; i++){
             let standCount = savedRubrics.at(i).length;
             for(var j = 0; j < 4 * standCount; j++){
@@ -139,12 +139,57 @@ function Table() {
                     cellText = savedRubrics.at(i).at(standNum).desc4;
                 }
 
-                tempRubrics.push({rubricTitle: savedNames.at(i).label, rubricNum: i, standard: stand, standardNum: standNum, cellNum: j%4 + 1, cellDesc: cellText})
+                tempRubrics.push({rubricTitle: savedNames.at(i).label, rubricNum: i, standard: stand, standardNum: (standNum + stoodNum), cellNum: j%4 + 1, cellDesc: cellText})
             }
+            stoodNum+= standCount;
         }
 
         console.log(initRubrics);
         console.log(tempRubrics);
+        finalRubrics = tempRubrics;
+        makeSQLStatement(tempRubrics, initRubrics);
+    }
+
+    const makeSQLStatement = (finalRubrics, inRubrics) => {
+        console.log("UNDER");
+
+        let statement = "";
+        let length = -1;
+        let add = -1; //Were rubrics added or deleted?
+
+        if(finalRubrics.at(finalRubrics.length - 1).rubricNum >= inRubrics.at(inRubrics.length - 1).rubricNum){
+            length = finalRubrics.at(finalRubrics.length - 1).rubricNum;
+            add = 2;
+            if(finalRubrics.at(finalRubrics.length - 1).rubricNum >= inRubrics.at(inRubrics.length - 1).rubricNum){
+                add = 1;
+            }
+        }
+        else{
+            length = inRubrics.at(inRubrics.length - 1).rubricNum;
+            add = 3;
+        }
+
+        let dataItem = 0;
+
+        if(add == 1){
+            for(let i = 0; i <= length; i++){
+                while(!(finalRubrics.at(dataItem + 1) == i + 1) && !(inRubrics.at(dataItem + 1) == i + 1)){
+                    if(!(finalRubrics.at(dataItem).cellDesc).localeCompare(inRubrics.at(dataItem).cellDesc)){ //UPDATE CELL TEXT
+                        statement += "UPDATE `cell` SET `cellDesc` = '"+finalRubrics.at(dataItem).cellDesc+"' WHERE `cell`.`idCell` = "+(dataItem)+";"
+                    }
+                    if((dataItem%4 === 0) && (!(finalRubrics.at(dataItem).cellDesc).localeCompare(inRubrics.at(dataItem).cellDesc))){
+                        statement += "UPDATE `standard` SET `standardName` = '"+finalRubrics.at(dataItem).standard+"' WHERE `standard`.`idStandard` = "+(finalRubrics.at(dataItem).standNum)+";"
+                    }
+                    dataItem++;
+                    
+                }
+                if((!(finalRubrics.at(dataItem - 1).rubricTitle).localeCompare(inRubrics.at(dataItem - 1).rubricTitle))){
+                    statement += "UPDATE `rubric` SET `rubricName` = '"+finalRubrics.at(dataItem).rubricTitle+"' WHERE `rubric`.`rubricID` = "+(finalRubrics.at(dataItem - 1).rubricNum)+";"
+                }
+            }
+        }
+
+        console.log("SET: " +statement);
         console.log("OVER");
     }
 
