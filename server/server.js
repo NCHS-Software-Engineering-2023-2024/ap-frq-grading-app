@@ -51,8 +51,14 @@ app.get('/rubricsInfo', (req, res) => {
   })
 });
 
-app.post('/message', (req, res) => {
-    //res.json({ message: "Hello from server!" });
+app.post('/rubricsInfo', (req, res) => {
+    
+    con.query(req.body, (err, data) => {
+      console.log("Complete!");
+      if (err) return res.json(err);
+      return console.log(data);
+
+    })
     
 });
 

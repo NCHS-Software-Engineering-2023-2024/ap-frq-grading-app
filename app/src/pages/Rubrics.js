@@ -173,6 +173,11 @@ function Table() {
             add = 3;
             
         }
+        
+
+        let cellInfo = [];
+        let standInfo = [];
+        let rubricInfo = [];
 
         let dataItem = 0;
         console.log("a");
@@ -182,21 +187,32 @@ function Table() {
                 while(((finalRubrics.at(dataItem) != null) && (inRubrics.at(dataItem) != null)) && (!(finalRubrics.at(dataItem).rubricNum == i + 1) && !(inRubrics.at(dataItem).rubricNum == i + 1))){
                     console.log(dataItem);
                     if((finalRubrics.at(dataItem).cellDesc).localeCompare(inRubrics.at(dataItem).cellDesc)){ //UPDATE CELL TEXT
-                        statement += "UPDATE `cell` SET `cellDesc` = '"+finalRubrics.at(dataItem).cellDesc+"' WHERE `cell`.`idCell` = "+(dataItem)+";"
+                        //statement += "UPDATE `cell` SET `cellDesc` = '"+finalRubrics.at(dataItem).cellDesc+"' WHERE `cell`.`idCell` = "+(dataItem)+";"
+                        cellInfo.push({cellId: dataItem, cellDesc: finalRubrics.at(dataItem).cellDesc})
                     }
                     if((dataItem%4 === 0) && ((finalRubrics.at(dataItem).standard).localeCompare(inRubrics.at(dataItem).standard))){
-                        statement += "UPDATE `standard` SET `standardName` = '"+finalRubrics.at(dataItem).standard+"' WHERE `standard`.`idStandard` = "+(finalRubrics.at(dataItem).standardNum)+";"
+                        //statement += "UPDATE `standard` SET `standardName` = '"+finalRubrics.at(dataItem).standard+"' WHERE `standard`.`idStandard` = "+(finalRubrics.at(dataItem).standardNum)+";"
+                        standInfo.push({standardId: finalRubrics.at(dataItem).standardNum, standardDesc: finalRubrics.at(dataItem).standard})
                     }
                     dataItem++;
                 }
                 if(((finalRubrics.at(dataItem - 1).rubricTitle).localeCompare(inRubrics.at(dataItem - 1).rubricTitle))){
-                    statement += "UPDATE `rubric` SET `rubricName` = '"+finalRubrics.at(dataItem - 1).rubricTitle+"' WHERE `rubric`.`rubricID` = "+(finalRubrics.at(dataItem - 1).rubricNum)+";"
+                    //statement += "UPDATE `rubric` SET `rubricName` = '"+finalRubrics.at(dataItem - 1).rubricTitle+"' WHERE `rubric`.`rubricID` = "+(finalRubrics.at(dataItem - 1).rubricNum)+";"
+                    rubricInfo.push({rubricId: finalRubrics.at(dataItem - 1).rubricTitle, rubricTitle: finalRubrics.at(dataItem - 1).rubricNum})
                 }
             }
         }
 
-        console.log("SET: " +statement);
+        //console.log("SET: " +statement);
         setInitSQL(finalRubrics);
+        
+
+        /*
+        axios.post('http://localhost:8000/rubricsInfo', {})
+            .then(res => console.log(res))
+            .catch(er => console.log(er));
+        */
+
         console.log("OVER");
     }
 
