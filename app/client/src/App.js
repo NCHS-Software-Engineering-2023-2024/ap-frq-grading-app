@@ -22,10 +22,10 @@ function App() {
   const responseMessage = (response) => {
     console.log(response);
   };
-const errorMessage = (error) => {
+  const errorMessage = (error) => {
     console.log(error);
   };
-  const [ user, setUser ] = useState([]);
+  /*const [ user, setUser ] = useState([]);
   const [ profile, setProfile ] = useState([]);
 
   const login = useGoogleLogin({
@@ -57,15 +57,15 @@ const errorMessage = (error) => {
       googleLogout();
       setProfile(null);
   };
+*/
 
-  
   return (
      <div>
 
-    <GoogleOAuthProvider clientId="78244490523-lobbagoj7mhobmmc9c8uv06164ivbtqr.apps.googleusercontent.com">
+<GoogleOAuthProvider clientId="78244490523-lobbagoj7mhobmmc9c8uv06164ivbtqr.apps.googleusercontent.com">
      {<BrowserRouter>
         <Routes>
-          <Route path ="/" element={<Login />} />
+          <Route path ="/" element={<Dashboard />} />
           <Route path="/home" element={<Dashboard />} />
           <Route path="/info" element={<Info />} />
 
@@ -82,9 +82,6 @@ const errorMessage = (error) => {
         </Routes>
       </BrowserRouter>}
       </GoogleOAuthProvider>
-    
-      {}
-    
       
 
     </div>
