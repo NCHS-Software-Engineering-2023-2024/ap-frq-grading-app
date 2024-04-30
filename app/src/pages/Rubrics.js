@@ -189,6 +189,12 @@ function Table() {
                     if((finalRubrics.at(dataItem).cellDesc).localeCompare(inRubrics.at(dataItem).cellDesc)){ //UPDATE CELL TEXT
                         //statement += "UPDATE `cell` SET `cellDesc` = '"+finalRubrics.at(dataItem).cellDesc+"' WHERE `cell`.`idCell` = "+(dataItem)+";"
                         cellInfo.push({cellId: dataItem, cellDesc: finalRubrics.at(dataItem).cellDesc})
+                        axios.post('http://localhost:8000/rubricsInfo', {
+                            cellDesc: finalRubrics.at(dataItem).cellDesc,
+                            cellNum: dataItem
+                        })
+                            .then(res => console.log(res))
+                            .catch(er => console.log(er));
                     }
                     if((dataItem%4 === 0) && ((finalRubrics.at(dataItem).standard).localeCompare(inRubrics.at(dataItem).standard))){
                         //statement += "UPDATE `standard` SET `standardName` = '"+finalRubrics.at(dataItem).standard+"' WHERE `standard`.`idStandard` = "+(finalRubrics.at(dataItem).standardNum)+";"
