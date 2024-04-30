@@ -53,7 +53,9 @@ app.get('/rubricsInfo', (req, res) => {
 
 app.post('/rubricsInfo', (req, res) => {
     
-    con.query(req.body, (err, data) => {
+    const {cellDesc, idCell} = req.body;
+    const statement = "UPDATE `cell` SET `cellDesc` = '(?)' WHERE `cell`.`idCell` = (?);";
+    con.query(statement, [cellDesc, idCell], (err, data) => {
       console.log("Complete!");
       if (err) return res.json(err);
       return console.log(data);
