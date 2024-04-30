@@ -52,11 +52,20 @@ app.get('/rubricsInfo', (req, res) => {
 });
 
 app.post('/rubricsInfo', (req, res) => {
+    let statement = "";
+    const {desc, id, path} = req.body;
+    if(path == 1){
+      statement = "UPDATE `cell` SET `cellDesc` = (?) WHERE `cell`.`idCell` = (?);";
+    }
+    else if(path == 2){
+      statement = "UPDATE `standard` SET `standardName` = (?) WHERE `standard`.`idStandard` = (?);";
+    }
+    else{
+      statement = "UPDATE `rubric` SET `rubricName` = (?) WHERE `rubric`.`rubricID` = (?);";
+    }
     
-    const {cellDesc, idCell} = req.body;
-    const statement = "UPDATE `cell` SET `cellDesc` = '(?)' WHERE `cell`.`idCell` = (?);";
-    con.query(statement, [cellDesc, idCell], (err, data) => {
-      console.log("Complete!");
+    con.query(statement, [desc, id], (err, data) => {
+      console.log("Complete!" +desc+" "+id);
       if (err) return res.json(err);
       return console.log(data);
 

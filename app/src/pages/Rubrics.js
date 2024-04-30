@@ -188,23 +188,38 @@ function Table() {
                     console.log(dataItem);
                     if((finalRubrics.at(dataItem).cellDesc).localeCompare(inRubrics.at(dataItem).cellDesc)){ //UPDATE CELL TEXT
                         //statement += "UPDATE `cell` SET `cellDesc` = '"+finalRubrics.at(dataItem).cellDesc+"' WHERE `cell`.`idCell` = "+(dataItem)+";"
-                        cellInfo.push({cellId: dataItem, cellDesc: finalRubrics.at(dataItem).cellDesc})
+                        //cellInfo.push({cellId: dataItem, cellDesc: finalRubrics.at(dataItem).cellDesc})
                         axios.post('http://localhost:8000/rubricsInfo', {
-                            cellDesc: finalRubrics.at(dataItem).cellDesc,
-                            cellNum: dataItem
+                            desc: finalRubrics.at(dataItem).cellDesc,
+                            id: dataItem,
+                            path: 1
                         })
                             .then(res => console.log(res))
                             .catch(er => console.log(er));
                     }
                     if((dataItem%4 === 0) && ((finalRubrics.at(dataItem).standard).localeCompare(inRubrics.at(dataItem).standard))){
                         //statement += "UPDATE `standard` SET `standardName` = '"+finalRubrics.at(dataItem).standard+"' WHERE `standard`.`idStandard` = "+(finalRubrics.at(dataItem).standardNum)+";"
-                        standInfo.push({standardId: finalRubrics.at(dataItem).standardNum, standardDesc: finalRubrics.at(dataItem).standard})
+                        //standInfo.push({standardId: finalRubrics.at(dataItem).standardNum, standardDesc: finalRubrics.at(dataItem).standard})
+                        axios.post('http://localhost:8000/rubricsInfo', {
+                            desc: finalRubrics.at(dataItem).standard,
+                            id: finalRubrics.at(dataItem).standardNum,
+                            path: 2
+                        })
+                            .then(res => console.log(res))
+                            .catch(er => console.log(er));
                     }
                     dataItem++;
                 }
                 if(((finalRubrics.at(dataItem - 1).rubricTitle).localeCompare(inRubrics.at(dataItem - 1).rubricTitle))){
                     //statement += "UPDATE `rubric` SET `rubricName` = '"+finalRubrics.at(dataItem - 1).rubricTitle+"' WHERE `rubric`.`rubricID` = "+(finalRubrics.at(dataItem - 1).rubricNum)+";"
-                    rubricInfo.push({rubricId: finalRubrics.at(dataItem - 1).rubricTitle, rubricTitle: finalRubrics.at(dataItem - 1).rubricNum})
+                    //rubricInfo.push({rubricId: finalRubrics.at(dataItem - 1).rubricTitle, rubricTitle: finalRubrics.at(dataItem - 1).rubricNum})
+                    axios.post('http://localhost:8000/rubricsInfo', {
+                        desc: finalRubrics.at(dataItem - 1).rubricTitle,
+                        id: finalRubrics.at(dataItem - 1).rubricNum,
+                        path: 3
+                    })
+                        .then(res => console.log(res))
+                        .catch(er => console.log(er));
                 }
             }
         }
@@ -297,7 +312,7 @@ function Table() {
         setCurrentRubric(savedRubrics.at(obj.value));
     }
 
-    //IN PROGRESS
+    
     const addRubric = () => {
         let tempRubric = ([{
             standard: "Default Standard",
@@ -431,7 +446,6 @@ function Table() {
         setRubrics(tempRubrics)
     }
 
-    //Will need to tweak after adding database 
     //Update Editted contents
     const handleUpdate = (standard) => {
         let index = getSubIndex(currentRubric, standard);
@@ -478,7 +492,7 @@ function Table() {
         <div>
 
             
-            <button className = "Save"  onClick={() => turnSQL()}> SAVE </button>
+            
 
             <h2>
             <Select
@@ -565,6 +579,8 @@ function Table() {
                     alignItems: "center"
                 }}>
                     <button type = "submit" value = "submit" className='addRowButton' onClick={() => newRow()}> Add Row </button>
+
+                    <button className = "addRowButton"  onClick={() => turnSQL()}> SAVE </button>
                 </body>
             </div>
 
