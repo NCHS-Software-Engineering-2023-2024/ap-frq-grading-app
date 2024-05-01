@@ -13,7 +13,7 @@ export default function NewRubric() {
                 justifyContent: "center",
                 alignItems: "center"
             }}>
-                <h1> to be implemented </h1>
+                <h1> to be implemented soon </h1>
             </body>
         </div>
     )
