@@ -77,6 +77,187 @@
   cursor: pointer;
 }
 
+.updateStandardButton {
+  background-color: lightcoral;
+  border: none;
+  color: black;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  margin: 0px 0px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.editStandardButton {
+  background-color: lightcoral;
+  border: black;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0px 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.deleteStandardButton {
+  background-color: rgb(190, 0, 0);
+  border: black;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0px 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.addRowButton {
+  background-color: lightcoral;
+  border: black;
+  color: black;
+  padding: 15px 35px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 24px;
+  margin: 0px 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.addRubricButton {
+  background-color: lightcoral;
+  border: black;
+  color: rgb(0, 0, 0);
+  padding: 15px 35px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 28px;
+  margin: auto;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.deleteRubricButton {
+  background-color: rgb(190, 0, 0);
+  border: black;
+  color: rgb(0, 0, 0);
+  padding: 15px 35px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 28px;
+  margin: auto;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.descInputField {
+  border: none;
+  outline: none;
+  padding: none;
+  margin: 0px 0px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+}
+
+.standardInputField {
+  border: none;
+  outline: none;
+  background: none;
+  padding: none;
+  margin: none;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.RubricStandard { 
+  margin: 13px 20px;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+}
+
+.RubricTitle {
+  padding: 50px 50px;
+  text-align: center;
+  margin: auto;
+}
+
+.RubricTitleInput {
+  text-align: center;
+  margin: auto 50px;
+  font-size: xxx-large;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  border: none;
+}
+
+.DashboardButton {
+  background-color: lightcoral;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 24px;
+  margin: 50px 2px;
+  cursor: pointer;
+}
+
+table, th, td, tr {
+  text-align: center;
+  width: 65%;
+  border-collapse: collapse;
+  margin: 50px 50px;
+  padding: 10px 0px;
+  border: 3px solid;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 24px;
+}
+
+.rubrow1, .rubrow2, .rubrow3, .rubrow4 {
+  width: 21%;
+}
+
+.rubrow5 {
+  width: 16%;
+}
+
+form{
+  padding: 100px auto;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 100%;
+}
+
+.addStandardButton {
+  background-color: lightcoral;
+  border: none;
+  color: black;
+  padding: 15px 320px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 24px;
+  margin: 40px 700px;
+  cursor: pointer;
+}
+
+.StandardRow {
+  background-color: lightcoral;
+}
+
+.NumsRow {
+  background-color: rgb(240, 176, 176);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
