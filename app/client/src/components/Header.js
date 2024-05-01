@@ -42,25 +42,30 @@ export default function Header() {
             <header className="App-header">
             <GoogleOAuthProvider clientId="78244490523-lobbagoj7mhobmmc9c8uv06164ivbtqr.apps.googleusercontent.com">
                 <br />
-                <br />
                 {profile ? (
-                    <div>
+                    <div style={{ position: 'absolute', top: 0, left: 0 }}>
+                        <button className="LogoutButton" onClick={logOut}>Log Out</button>
+                        <br />
+                        <br />
+                        <br />
+
+                        <div style = {{ padding: '10px', textAlign: 'left'}}>
                         <img src={profile.picture} alt="user image" />
-                        <h3>User Logged in</h3>
                         <p>Name: {profile.name}</p>
                         <p>Email Address: {profile.email}</p>
                         <br />
                         <br />
-                        <button onClick={logOut}>Log out</button>
                     </div>
+                    </div>
+                    
                 ) : (
-                    <button onClick={login}>Sign in with Google 🚀 </button>
+                    <button className="LogoutButton" onClick={login}>Sign in with Google 🚀 </button>
                 )}
                 </GoogleOAuthProvider>
 
-                <p>
+                <h1>
                 Dashboard
-                </p>
+                </h1>
 
                 <button className="InfoTab" onClick={()=>navigate("/info")}>
                     Info
