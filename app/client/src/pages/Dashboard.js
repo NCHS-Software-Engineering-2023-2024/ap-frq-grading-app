@@ -18,19 +18,20 @@ export default function Dashboard() {
                 <body style={{
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center"
+                    alignItems: "center",
+                    flexDirection: "row"
                 }}>
                     <button onClick={()=>navigate("/rubrics")} className="DashboardButton">
                         Rubrics
                     </button>
 
-                    <button onClick={()=>navigate("/students")} className="DashboardButton">
+                    {/* <button onClick={()=>navigate("/students")} className="DashboardButton">
                         Students
                     </button>
 
                     <button onClick={()=>navigate("/assignments")} className="DashboardButton">
                         Assignments
-                    </button>
+                    </button> */}
 
                     <button onClick={()=>navigate("/grade")} className="DashboardButton">
                         Grade

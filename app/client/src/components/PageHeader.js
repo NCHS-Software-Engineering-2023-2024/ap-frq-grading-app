@@ -5,9 +5,9 @@ export default function PageHeader({ headerName, toNavigate }) {
     return (
         <div className="App">
             <header className="App-header">
-                <p>
+                <h1>
                     {headerName}
-                </p>
+                </h1>
 
                 <button onClick={() => navigate(toNavigate)} className="LogoutButton">
                     Back

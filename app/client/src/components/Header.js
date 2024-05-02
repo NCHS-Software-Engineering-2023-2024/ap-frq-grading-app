@@ -59,7 +59,7 @@ export default function Header() {
                     </div>
                     
                 ) : (
-                    <button className="LogoutButton" onClick={login}>Sign in with Google 🚀 </button>
+                    <button className="LogoutButton" onClick={login}>Sign In With Google 🚀 </button>
                 )}
                 </GoogleOAuthProvider>
 

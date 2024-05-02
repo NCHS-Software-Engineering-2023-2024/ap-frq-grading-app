@@ -50,32 +50,7 @@
   border-radius: 5px;
 }
 
-.DashboardButton {
-  background-color: lightcoral;
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 24px;
-  margin: 50px auto; /* Updated to center the buttons horizontally */
-  cursor: pointer;
-}
 
-
-
-
-.DashboardButton {
-  background-color: lightcoral;
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 24px;
-  margin: 50px 2px;
-  cursor: pointer;
-}
 
 .updateStandardButton {
   background-color: lightcoral;
@@ -208,7 +183,7 @@
   text-align: center;
   text-decoration: none;
   font-size: 24px;
-  margin: 50px 2px;
+  margin: 50px 10px;
   cursor: pointer;
 }
 
