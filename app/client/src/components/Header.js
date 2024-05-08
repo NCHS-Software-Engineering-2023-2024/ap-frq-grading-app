@@ -43,19 +43,25 @@ export default function Header() {
             <GoogleOAuthProvider clientId="78244490523-lobbagoj7mhobmmc9c8uv06164ivbtqr.apps.googleusercontent.com">
                 <br />
                 {profile ? (
-                    <div style={{ position: 'absolute', top: 0, left: 0 }}>
-                        <button className="LogoutButton" onClick={logOut}>Log Out</button>
-                        <br />
-                        <br />
-                        <br />
+                    <div>
+                        <div style={{ position: 'absolute', top: 0, left: 0 }}>
+                            <button className="LogoutButton" onClick={logOut}>Log Out</button>
+                            <br />
+                            <br />
+                            <br />
 
-                        <div style = {{ padding: '10px', textAlign: 'left'}}>
-                        <img src={profile.picture} alt="user image" />
-                        <p>Name: {profile.name}</p>
-                        <p>Email Address: {profile.email}</p>
-                        <br />
-                        <br />
-                    </div>
+                            <div style = {{ padding: '10px', textAlign: 'left'}}>
+                            <img src={profile.picture} alt="user image" />
+                            
+                            <br />
+                            <br />
+                            </div>
+                        </div>
+
+                        <div style = {{ padding: '2px', textAlign: 'center'}}>
+                            <h3>Welcome, {profile.name}!</h3>
+                        </div>
+                        
                     </div>
                     
                 ) : (
@@ -63,6 +69,8 @@ export default function Header() {
                 )}
                 </GoogleOAuthProvider>
 
+                
+                
                 <h1>
                 Dashboard
                 </h1>
