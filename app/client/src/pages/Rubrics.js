@@ -34,25 +34,25 @@ const styles = {
 
 var testRubrics = [
     [{
-        standard: "Evidence",
-        desc1: "one",
-        desc2: "two",
-        desc3: "three",
-        desc4: "four"
+        standard: "Standard 1",
+        desc1: "Enter Desc1",
+        desc2: "Enter Desc2",
+        desc3: "Enter Desc3",
+        desc4: "Enter Desc4"
     },
     {
-        standard: "Thesis",
-        desc1: "one",
-        desc2: "two",
-        desc3: "three",
-        desc4: "four"
+        standard: "Standard 2",
+        desc1: "Enter Desc1",
+        desc2: "Enter Desc2",
+        desc3: "Enter Desc3",
+        desc4: "Enter Desc4"
     },
     {
-        standard: "Complication",
-        desc1: "one",
-        desc2: "two",
-        desc3: "three",
-        desc4: "four"
+        standard: "Standard 3",
+        desc1: "Enter Desc1",
+        desc2: "Enter Desc2",
+        desc3: "Enter Desc3",
+        desc4: "Enter Desc4"
     }],
 //Test rubric
     [{
@@ -315,11 +315,11 @@ function Table() {
     
     const addRubric = () => {
         let tempRubric = ([{
-            standard: "Default Standard",
-            desc1: "one",
-            desc2: "two",
-            desc3: "three",
-            desc4: "four"
+            standard: "Enter Standard",
+            desc1: "Enter Desc1",
+            desc2: "Enter Desc2",
+            desc3: "Enter Desc3",
+            desc4: "Enter Desc4"
         }]);
         setCurrentNum(savedNames.length);
         setCurrentTitle("New Rubric");
