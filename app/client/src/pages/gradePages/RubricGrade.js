@@ -6,7 +6,13 @@ import PageHeader from '../../components/PageHeader';
 
 const RubricGrade = ({classPeriod}) => {
     return (
-        <PageHeader headerName="Grade Assignment" toNavigate="/grade"/>
+        <div>
+            <PageHeader headerName="Grade Assignment" toNavigate="/home"/>
+            
+            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                <h2> To be implemented soon, please return home. </h2>
+            </div>
+        </div>
     );
 };
 export default RubricGrade;
